@@ -1,0 +1,1 @@
+export const authAPIURL: string = 'https://dummyjson.com/'

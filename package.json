@@ -10,9 +10,11 @@
     "test": "jest"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.5.1",
     "react": "18.3.1",
     "react-native": "0.77.0",
-    "react-native-bootsplash": "^6.3.3"
+    "react-native-bootsplash": "^6.3.3",
+    "react-native-keychain": "^9.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
