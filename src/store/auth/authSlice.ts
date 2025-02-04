@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AuthSliceT } from "../../types/store/auth/authSlice";
-import { getAuthUser } from "./authAction";
+import { getAuthUser, refreshToken } from "./authAction";
 
 export const authSliceStateT: AuthSliceT = {
     user: {}
@@ -17,7 +17,24 @@ const authSlice = createSlice({
     extraReducers(builder) {
         builder.addCase(getAuthUser.fulfilled, (state, action) => {
             state.user = action.payload
-        })
+        }),
+            builder.addCase(getAuthUser.rejected, (state, action) => {
+                state.user = {}
+            }),
+            builder.addCase(refreshToken.fulfilled, (state, action) => {
+                state.user = {
+                    ...state.user,
+                    accessToken: action.payload.accessToken,
+                    refreshToken: action.payload.refreshToken
+                }
+            }),
+            builder.addCase(refreshToken.rejected, (state, action) => {
+                state.user = {
+                    ...state.user,
+                    accessToken: undefined,
+                    refreshToken: undefined
+                }
+            })
     }
 })
 
