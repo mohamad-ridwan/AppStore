@@ -31,6 +31,10 @@ export interface UserState {
     userAgent?: string;
     crypto?: Crypto;
     role?: string;
+    token?: Token
+}
+
+export interface Token {
     accessToken?: string
     refreshToken?: string
 }

@@ -24,15 +24,16 @@ const authSlice = createSlice({
             builder.addCase(refreshToken.fulfilled, (state, action) => {
                 state.user = {
                     ...state.user,
-                    accessToken: action.payload.accessToken,
-                    refreshToken: action.payload.refreshToken
+                    token: {
+                        accessToken: action.payload.accessToken,
+                        refreshToken: action.payload.refreshToken
+                    }
                 }
             }),
             builder.addCase(refreshToken.rejected, (state, action) => {
                 state.user = {
                     ...state.user,
-                    accessToken: undefined,
-                    refreshToken: undefined
+                    token: {}
                 }
             })
     }

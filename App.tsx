@@ -5,7 +5,7 @@
  * @format
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import type { PropsWithChildren } from 'react';
 import {
   SafeAreaView,
@@ -17,8 +17,6 @@ import {
   View,
 } from 'react-native';
 
-import BootSplash from "react-native-bootsplash";
-
 import {
   Colors,
   DebugInstructions,
@@ -26,6 +24,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import ConfigSplashScreen from './src/config/splash-screen';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -58,21 +57,13 @@ function Section({ children, title }: SectionProps): React.JSX.Element {
 }
 
 function App(): React.JSX.Element {
+  ConfigSplashScreen()
+  
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-
-  useEffect(() => {
-    const init = async () => {
-      // …do multiple sync or async tasks
-    };
-
-    init().finally(async () => {
-      await BootSplash.hide({ fade: true });
-    });
-  }, []);
 
   return (
     <SafeAreaView style={backgroundStyle}>
