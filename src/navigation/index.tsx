@@ -16,7 +16,11 @@ export default function Navigation() {
                     component={HomeScreen}
                     options={{ title: 'Welcome' }}
                 />
-                <Stack.Screen name="Login" component={LoginScreen} />
+                <Stack.Screen
+                    name="Login"
+                    component={LoginScreen}
+                    options={{ headerShown: false }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     )

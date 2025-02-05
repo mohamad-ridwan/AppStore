@@ -1,7 +1,35 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { authAPIURL } from "../../services/api/baseURL"
 import { reqHeaders } from "../../services/api/reqHeaders"
-import { ReqAuthUserT, ReqRefreshTokenT } from "../../types/store/auth/authAction"
+import { ReqAuthUserT, ReqLoginUserT, ReqRefreshTokenT } from "../../types/store/auth/authAction"
+
+export const loginUser = createAsyncThunk(
+    "login-user",
+    async ({
+        username,
+        password,
+        expiresInMin
+    }: ReqLoginUserT, { rejectWithValue }) => {
+        try {
+            const response = await fetch(`${authAPIURL}auth/login`, reqHeaders(
+                'POST',
+                { "Content-Type": "application/json" },
+                JSON.stringify({ username, password, expiresInMin }),
+                'include'
+            ))
+            if (!response.ok) {
+                return rejectWithValue(response.statusText)
+            }
+            const result = await response.json()
+            if (result?.id === undefined) {
+                return rejectWithValue(result)
+            }
+            return result
+        } catch (error) {
+            return rejectWithValue(error)
+        }
+    }
+)
 
 export const refreshToken = createAsyncThunk(
     "refresh-token",

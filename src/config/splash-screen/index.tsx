@@ -16,6 +16,4 @@ export default function ConfigSplashScreen() {
             await BootSplash.hide({ fade: true });
         });
     }, []);
-
-    return null
 }
