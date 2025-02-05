@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { AuthSliceT } from "../../types/store/auth/authSlice";
-import { getAuthUser, refreshToken } from "./authAction";
+import { getAuthUser, loginUser, refreshToken } from "./authAction";
 
 export const authSliceStateT: AuthSliceT = {
     user: {}
@@ -15,9 +15,15 @@ const authSlice = createSlice({
         },
     },
     extraReducers(builder) {
-        builder.addCase(getAuthUser.fulfilled, (state, action) => {
+        builder.addCase(loginUser.fulfilled, (state, action) => {
             state.user = action.payload
         }),
+            builder.addCase(loginUser.rejected, (state, action) => {
+                state.user = {}
+            }),
+            builder.addCase(getAuthUser.fulfilled, (state, action) => {
+                state.user = action.payload
+            }),
             builder.addCase(getAuthUser.rejected, (state, action) => {
                 state.user = {}
             }),

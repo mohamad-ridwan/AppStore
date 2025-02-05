@@ -12,7 +12,8 @@ export default function LoginForm() {
         handleChangeInput,
         handleSubmit,
         errMsgInput,
-        isDisableSubmit
+        isDisableSubmit,
+        loadingSubmit
     } = useLogin()
 
     return (
@@ -49,6 +50,7 @@ export default function LoginForm() {
                 borderRadius={50}
                 onPress={handleSubmit}
                 isDisabled={isDisableSubmit}
+                isLoading={loadingSubmit}
             />
         </View>
     )

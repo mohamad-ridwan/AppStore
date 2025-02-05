@@ -1,4 +1,4 @@
-import { GestureResponderEvent, PixelRatio, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { ActivityIndicator, GestureResponderEvent, PixelRatio, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { View } from "react-native";
 
 type Props = {
@@ -6,13 +6,19 @@ type Props = {
     borderRadius?: number
     onPress?: ((event: GestureResponderEvent) => void)
     isDisabled?: boolean
+    isLoading?: boolean
+    loadingSize?: number | "small" | "large"
+    loadingColor?: string
 }
 
 export default function BasicButton({
     name,
     borderRadius,
     onPress,
-    isDisabled
+    isDisabled,
+    isLoading,
+    loadingSize = 'small',
+    loadingColor = '#fff'
 }: Props) {
     return (
         <View style={styles.container}>
@@ -24,7 +30,13 @@ export default function BasicButton({
                 onPress={onPress}
                 disabled={isDisabled}
             >
-                <Text style={styles.text}>{name}</Text>
+                {isLoading ?
+                    <View style={styles.loading}>
+                        <ActivityIndicator size={loadingSize} color={loadingColor} />
+                    </View>
+                    :
+                    <Text style={styles.text}>{name}</Text>
+                }
             </TouchableOpacity>
         </View>
     )
@@ -40,10 +52,16 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         height: PixelRatio.roundToNearestPixel(45),
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     text: {
         color: 'white',
         fontWeight: 500
+    },
+    loading: {
+        height: '100%',
+        width: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })
