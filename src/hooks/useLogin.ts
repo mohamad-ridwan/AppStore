@@ -5,6 +5,7 @@ import { loginUser } from "../store/auth/authAction"
 import { UserState } from "../types/store/auth/authSlice"
 import { navigate } from "../navigation/RootNavigation"
 import { BackHandler } from "react-native"
+import { saveAccessToken } from "../services/storage-management/auth/saveAccessToken"
 
 export function useLogin() {
     const [form, setForm] = useState<ReqLoginUserT>({
@@ -66,6 +67,7 @@ export function useLogin() {
         const result = await dispatch(loginUser(form))
         const { id } = result?.payload as UserState
         if (id) {
+            await saveAccessToken(result?.payload?.accessToken, result?.payload?.refreshToken)
             navigate('Home')
             setLoadingSubmit(false)
             return
