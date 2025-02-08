@@ -4,6 +4,7 @@ import { HomeDataT } from "../types/sections/home";
 import Header from "../sections/home/Header";
 import SearchBar from "../components/search/SearchBar";
 import Banner from "../sections/home/Banner";
+import Categories from "../sections/home/categories";
 
 export function UseHome() {
     const [data, setData] = useState<HomeDataT[]>([
@@ -18,6 +19,10 @@ export function UseHome() {
         {
             id: '3',
             sectionType: 'TOP-BANNER'
+        },
+        {
+            id: '4',
+            sectionType: 'CATEGORIES'
         },
     ])
 
@@ -43,6 +48,8 @@ export function UseHome() {
             return <SearchBar />
         } else if (item.sectionType === 'TOP-BANNER') {
             return <Banner />
+        } else if (item.sectionType === 'CATEGORIES') {
+            return <Categories />
         }
         return null
     }, [])
