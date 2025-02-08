@@ -16,6 +16,8 @@ type Props = {
     inputBorderWidth?: number
     bgContainer?: string
     iconSize?: number
+    heightInputWrapper?: number
+    topIcon?: number
 }
 
 export default function Input({
@@ -32,7 +34,9 @@ export default function Input({
     inputRadius = 50,
     inputBorderWidth = 1,
     bgContainer,
-    iconSize = 18
+    iconSize = 18,
+    heightInputWrapper = PixelRatio.roundToNearestPixel(45),
+    topIcon = 12
 }: Props) {
     return (
         <View>
@@ -47,7 +51,8 @@ export default function Input({
                     {
                         borderRadius: inputRadius,
                         borderWidth: inputBorderWidth,
-                        backgroundColor: bgContainer
+                        backgroundColor: bgContainer,
+                        height: heightInputWrapper
                     }
                 ]}>
                     <TextInput
@@ -61,7 +66,10 @@ export default function Input({
                         secureTextEntry={secureTextEntry}
                     />
                     {icon &&
-                        <TouchableOpacity style={styles.icon} onPress={handleClickIcon} activeOpacity={0.8}>
+                        <TouchableOpacity style={[
+                            styles.icon,
+                            { top: topIcon }
+                        ]} onPress={handleClickIcon} activeOpacity={0.8}>
                             <Icon
                                 name={icon}
                                 color={colorIcon}
@@ -99,7 +107,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         borderColor: '#bbb',
         width: '100%',
-        height: PixelRatio.roundToNearestPixel(45),
         position: 'relative',
     },
     input: {
@@ -110,6 +117,5 @@ const styles = StyleSheet.create({
     icon: {
         position: 'absolute',
         right: 10,
-        top: 12
     }
 })

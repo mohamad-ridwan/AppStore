@@ -1,6 +1,6 @@
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { View } from "react-native";
+import { PixelRatio } from "react-native";
 import { CategoryNamesT } from "../../../../types/sections/home";
+import BasicButton from "../../../../components/button";
 
 type Props = {
     name: string
@@ -16,38 +16,18 @@ export default function PickCategoryItem({
     handlePickCategory
 }: Props) {
     return (
-        <View style={styles.container}>
-            <TouchableOpacity style={[
-                styles.touch,
-                {
-                    backgroundColor: isActive ? 'green' : 'transparent',
-                    borderColor: isActive ? 'green' : '#666'
-                }
-            ]}
-                activeOpacity={0.8}
-                onPress={() => handlePickCategory(type)}
-            >
-                <Text style={[
-                    styles.btnName,
-                    { color: isActive ? 'white' : 'black' }
-                ]}>{name}</Text>
-            </TouchableOpacity>
-        </View>
+        <BasicButton
+            name={name}
+            widthContainer={'auto'}
+            borderRadius={12}
+            touchPaddingHorizontal={10}
+            fontSizeName={12}
+            touchHeight={PixelRatio.roundToNearestPixel(35)}
+            touchBgColor={isActive ? 'green' : 'transparent'}
+            touchBorderWidth={1.5}
+            touchBorderColor={isActive ? 'green' : '#666'}
+            nameColor={isActive ? 'white' : 'black'}
+            onPress={() => handlePickCategory(type)}
+        />
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        paddingVertical: 10
-    },
-    touch: {
-        paddingVertical: 8,
-        paddingHorizontal: 10,
-        borderRadius: 12,
-        borderWidth: 2,
-    },
-    btnName: {
-        fontSize: 12,
-        fontWeight: 'medium'
-    }
-})
