@@ -12,6 +12,10 @@ type Props = {
     secureTextEntry?: boolean
     desc?: string
     descColor?: string
+    inputRadius?: number
+    inputBorderWidth?: number
+    bgContainer?: string
+    iconSize?: number
 }
 
 export default function Input({
@@ -24,20 +28,36 @@ export default function Input({
     handleClickIcon,
     secureTextEntry,
     desc,
-    descColor
+    descColor,
+    inputRadius = 50,
+    inputBorderWidth = 1,
+    bgContainer,
+    iconSize = 18
 }: Props) {
     return (
         <View>
             <View style={styles.container}>
-                <Text style={styles.title}>
-                    {title}
-                </Text>
-                <View style={styles.inputWrapper}>
+                {title &&
+                    <Text style={styles.title}>
+                        {title}
+                    </Text>
+                }
+                <View style={[
+                    styles.inputWrapper,
+                    {
+                        borderRadius: inputRadius,
+                        borderWidth: inputBorderWidth,
+                        backgroundColor: bgContainer
+                    }
+                ]}>
                     <TextInput
                         placeholder={placeholder}
                         onChangeText={onChangeText}
                         value={value}
-                        style={styles.input}
+                        style={[
+                            styles.input,
+                            { paddingRight: icon ? 20 : 5 }
+                        ]}
                         secureTextEntry={secureTextEntry}
                     />
                     {icon &&
@@ -45,7 +65,7 @@ export default function Input({
                             <Icon
                                 name={icon}
                                 color={colorIcon}
-                                size={18}
+                                size={iconSize}
                             />
                         </TouchableOpacity>
                     }
@@ -77,16 +97,15 @@ const styles = StyleSheet.create({
     },
     inputWrapper: {
         paddingHorizontal: 10,
-        borderRadius: 50,
         borderColor: '#bbb',
         width: '100%',
-        borderWidth: 1,
         height: PixelRatio.roundToNearestPixel(45),
         position: 'relative',
     },
     input: {
-        padding: 5,
-        height: '100%'
+        paddingVertical: 5,
+        height: '100%',
+        paddingLeft: 5
     },
     icon: {
         position: 'absolute',
