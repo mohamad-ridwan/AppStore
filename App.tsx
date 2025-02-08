@@ -6,17 +6,17 @@
  */
 
 import React from 'react';
-import ConfigSplashScreen from './src/config/splash-screen';
 import Navigation from './src/navigation';
 import { Provider } from 'react-redux';
 import { store } from './src/store';
+import ConfigSplashScreen from './src/config/splash-screen';
 
 function App(): React.JSX.Element {
-  ConfigSplashScreen()
-
   return (
     <Provider store={store}>
-      <Navigation />
+      <ConfigSplashScreen>
+        <Navigation />
+      </ConfigSplashScreen>
     </Provider>
   )
 }

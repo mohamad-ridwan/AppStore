@@ -1,24 +1,24 @@
-import { useEffect } from "react";
-import { getAccessToken } from "../../services/storage-management/auth/getAccessToken";
+import { ReactNode, useEffect } from "react";
 import BootSplash from "react-native-bootsplash";
-import { navigate } from "../../navigation/RootNavigation";
-import { Token } from "../../types/store/auth/authSlice";
+import { authentication } from "../../services/auth";
+import { useDispatch } from "react-redux";
 
-export default function ConfigSplashScreen() {
+type Props = {
+    children: ReactNode
+}
+
+export default function ConfigSplashScreen({children}: Props) {
+    const dispatch = useDispatch() as any
+
     useEffect(() => {
         const init = async () => {
-            const accessToken = await getAccessToken()
-            const token = accessToken as unknown
-            if(!accessToken || (
-                (token as Token)?.accessToken === undefined ||
-                (token as Token)?.refreshToken === undefined
-            )){
-                navigate('Login')
-            }
+            return await authentication(dispatch)
         };
 
         init().finally(async () => {
             await BootSplash.hide({ fade: true });
         });
     }, []);
+
+    return children
 }
