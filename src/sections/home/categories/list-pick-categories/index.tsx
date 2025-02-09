@@ -19,6 +19,8 @@ const ListPickCategories = memo(({
             renderItem={renderItem}
             keyExtractor={item => item.id}
             ItemSeparatorComponent={() => <View style={{ width: 7 }} />}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.container}
         />
     )
 })
@@ -27,6 +29,6 @@ export default ListPickCategories
 
 const styles = StyleSheet.create({
     container: {
-
+        paddingHorizontal: 10
     }
 })

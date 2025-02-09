@@ -18,6 +18,7 @@ type Props = {
     iconSize?: number
     heightInputWrapper?: number
     topIcon?: number
+    inputFontSize?: number
 }
 
 export default function Input({
@@ -36,7 +37,8 @@ export default function Input({
     bgContainer,
     iconSize = 18,
     heightInputWrapper = PixelRatio.roundToNearestPixel(45),
-    topIcon = 12
+    topIcon = 12,
+    inputFontSize
 }: Props) {
     return (
         <View>
@@ -61,7 +63,10 @@ export default function Input({
                         value={value}
                         style={[
                             styles.input,
-                            { paddingRight: icon ? 20 : 5 }
+                            {
+                                paddingRight: icon ? 20 : 5,
+                                fontSize: inputFontSize,
+                            }
                         ]}
                         secureTextEntry={secureTextEntry}
                     />

@@ -18,9 +18,10 @@ const SearchBar = memo(() => {
                 inputBorderWidth={0}
                 icon="search-outline"
                 bgContainer={'#EEE'}
-                iconSize={20}
-                topIcon={9}
-                heightInputWrapper={PixelRatio.roundToNearestPixel(40)}
+                iconSize={18}
+                topIcon={8}
+                inputFontSize={13}
+                heightInputWrapper={PixelRatio.roundToNearestPixel(35)}
             />
         </View>
     )

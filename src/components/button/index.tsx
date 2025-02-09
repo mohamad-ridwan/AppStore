@@ -18,6 +18,7 @@ type Props = {
     touchBorderWidth?: number
     touchBorderColor?: string
     nameColor?: string
+    containerMarginTop?: number
 }
 
 export default function BasicButton({
@@ -36,12 +37,16 @@ export default function BasicButton({
     touchBgColor = 'purple',
     touchBorderWidth,
     touchBorderColor,
-    nameColor = '#fff'
+    nameColor = '#fff',
+    containerMarginTop = 10
 }: Props) {
     return (
         <View style={[
             styles.container,
-            { width: widthContainer as '100%' }
+            {
+                width: widthContainer as '100%',
+                marginTop: containerMarginTop
+            }
         ]}>
             <TouchableOpacity style={[
                 styles.touch,
@@ -77,7 +82,6 @@ export default function BasicButton({
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 10
     },
     touch: {
         justifyContent: 'center',

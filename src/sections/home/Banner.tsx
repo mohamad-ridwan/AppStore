@@ -20,11 +20,12 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: PixelRatio.roundToNearestPixel(130),
-        padding: 10,
+        paddingHorizontal: 10,
+        paddingTop: 10,
     },
     image: {
         borderRadius: 15,
         width: '100%',
-        height: PixelRatio.roundToNearestPixel(130),
+        height: '100%',
     }
 })

@@ -10,6 +10,9 @@ const Header = memo(() => {
                 nameIcon="cart-outline"
                 btnBorderWidth={1}
                 btnBorderColor="#AAA"
+                btnHeight={30}
+                btnWidth={30}
+                sizeIcon={16}
             />
         </View>
     )
@@ -27,7 +30,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     title: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: 'medium'
     }
 })

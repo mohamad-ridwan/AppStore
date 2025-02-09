@@ -20,9 +20,10 @@ export default function PickCategoryItem({
             name={name}
             widthContainer={'auto'}
             borderRadius={12}
+            containerMarginTop={0}
             touchPaddingHorizontal={10}
             fontSizeName={12}
-            touchHeight={PixelRatio.roundToNearestPixel(35)}
+            touchHeight={PixelRatio.roundToNearestPixel(33)}
             touchBgColor={isActive ? 'green' : 'transparent'}
             touchBorderWidth={1.5}
             touchBorderColor={isActive ? 'green' : '#666'}

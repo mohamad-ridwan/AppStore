@@ -26,14 +26,15 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingHorizontal: 10
     },
     title: {
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: 600
     },
     btnText: {
         color: 'green',
-        fontSize: 14,
+        fontSize: 12,
     }
 })
