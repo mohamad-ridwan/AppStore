@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { authAPIURL } from "../../services/api/baseURL"
 import { reqHeaders } from "../../services/api/reqHeaders"
 import { ReqAuthUserT, ReqLoginUserT, ReqRefreshTokenT } from "../../types/store/auth/authAction"
+import { dummyJSON_API_URL } from "../../services/api/baseURL"
 
 export const loginUser = createAsyncThunk(
     "login-user",
@@ -11,7 +11,7 @@ export const loginUser = createAsyncThunk(
         expiresInMin
     }: ReqLoginUserT, { rejectWithValue }) => {
         try {
-            const response = await fetch(`${authAPIURL}auth/login`, reqHeaders(
+            const response = await fetch(`${dummyJSON_API_URL}auth/login`, reqHeaders(
                 'POST',
                 { "Content-Type": "application/json" },
                 JSON.stringify({ username, password, expiresInMin }),
@@ -38,7 +38,7 @@ export const refreshToken = createAsyncThunk(
         expiresInMins
     }: ReqRefreshTokenT, { rejectWithValue }) => {
         try {
-            const response = await fetch(`${authAPIURL}auth/refresh`,
+            const response = await fetch(`${dummyJSON_API_URL}auth/refresh`,
                 reqHeaders(
                     'POST',
                     {
@@ -69,7 +69,7 @@ export const getAuthUser = createAsyncThunk(
     "auth-user",
     async ({ token }: ReqAuthUserT, { rejectWithValue }) => {
         try {
-            const response = await fetch(`${authAPIURL}auth/me`,
+            const response = await fetch(`${dummyJSON_API_URL}auth/me`,
                 reqHeaders(
                     'GET',
                     {

@@ -1,7 +1,9 @@
+// STATES
 export type AuthSliceT = {
     user: UserState
 }
 
+// USER
 export interface UserState {
     id?: number | null
     firstName?: string

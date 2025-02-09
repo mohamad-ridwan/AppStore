@@ -1,17 +1,17 @@
 import { PixelRatio } from "react-native";
-import { CategoryNamesT } from "../../../../types/sections/home";
 import BasicButton from "../../../../components/button";
+import { Category } from "../../../../types/store/products/productsSlice";
 
 type Props = {
     name: string
-    type: CategoryNamesT
+    slug: Category
     isActive: boolean
-    handlePickCategory(type: CategoryNamesT): void
+    handlePickCategory(slug: Category): void
 }
 
 export default function PickCategoryItem({
     name,
-    type,
+    slug,
     isActive,
     handlePickCategory
 }: Props) {
@@ -28,7 +28,7 @@ export default function PickCategoryItem({
             touchBorderWidth={1.5}
             touchBorderColor={isActive ? 'green' : '#666'}
             nameColor={isActive ? 'white' : 'black'}
-            onPress={() => handlePickCategory(type)}
+            onPress={() => handlePickCategory(slug)}
         />
     )
 }

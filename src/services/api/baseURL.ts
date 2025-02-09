@@ -1,1 +1,1 @@
-export const authAPIURL: string = 'https://dummyjson.com/'
+export const dummyJSON_API_URL: string = 'https://dummyjson.com/'

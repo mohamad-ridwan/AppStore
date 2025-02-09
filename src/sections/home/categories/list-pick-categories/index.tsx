@@ -1,11 +1,11 @@
 import { memo } from "react";
 import { FlatList, ListRenderItem, StyleSheet } from "react-native";
-import { PickDataCategoriesT } from "../../../../types/sections/home";
 import { View } from "react-native";
+import { ProductsCategoriesT } from "../../../../types/store/products/productsSlice";
 
 type Props = {
-    data: PickDataCategoriesT[]
-    renderItem: ListRenderItem<PickDataCategoriesT>
+    data: ProductsCategoriesT[]
+    renderItem: ListRenderItem<ProductsCategoriesT>
 }
 
 const ListPickCategories = memo(({
@@ -17,7 +17,8 @@ const ListPickCategories = memo(({
             horizontal
             data={data}
             renderItem={renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.name}
+            initialNumToRender={6}
             ItemSeparatorComponent={() => <View style={{ width: 7 }} />}
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.container}
