@@ -1,18 +1,20 @@
 import { StyleSheet, Text, View } from "react-native";
 import ButtonIcon from "../../components/button/ButtonIcon";
 import { memo } from "react";
+import { THEME_COLOR } from "../../config/theme/theme-color";
 
 const Header = memo(() => {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Discover</Text>
             <ButtonIcon
-                nameIcon="cart-outline"
+                nameIcon="bag-handle-outline"
                 btnBorderWidth={1}
-                btnBorderColor="#AAA"
+                btnBorderColor={THEME_COLOR.PRIMARY_COLOR.gray}
                 btnHeight={30}
                 btnWidth={30}
                 sizeIcon={16}
+                colorIcon={THEME_COLOR.SECONDARY_COLOR.darkGray}
             />
         </View>
     )
@@ -31,6 +33,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 16,
-        fontWeight: 'medium'
+        fontWeight: 'medium',
+        color: THEME_COLOR.SECONDARY_COLOR.darkGray
     }
 })

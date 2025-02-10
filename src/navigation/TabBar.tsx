@@ -40,7 +40,7 @@ export default function TabBar({
         return {
             ...route,
             icon,
-            colorIcon: isFocused ? THEME_COLOR.PRIMARY_COLOR.green : 'black'
+            colorIcon: isFocused ? THEME_COLOR.PRIMARY_COLOR.green : THEME_COLOR.SECONDARY_COLOR.darkGray
         }
     })
 

@@ -20,6 +20,7 @@ const SearchBar = memo(() => {
                 icon="search-outline"
                 bgContainer={THEME_COLOR.PRIMARY_COLOR.gray}
                 iconSize={18}
+                colorIcon={THEME_COLOR.SECONDARY_COLOR.darkGray}
                 topIcon={8}
                 inputFontSize={13}
                 heightInputWrapper={PixelRatio.roundToNearestPixel(35)}

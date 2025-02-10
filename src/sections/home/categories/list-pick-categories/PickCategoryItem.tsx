@@ -27,8 +27,8 @@ export default function PickCategoryItem({
             touchHeight={PixelRatio.roundToNearestPixel(33)}
             touchBgColor={isActive ? THEME_COLOR.PRIMARY_COLOR.green : 'transparent'}
             touchBorderWidth={1.5}
-            touchBorderColor={isActive ? THEME_COLOR.PRIMARY_COLOR.green : THEME_COLOR.SECONDARY_COLOR.gray}
-            nameColor={isActive ? 'white' : 'black'}
+            touchBorderColor={isActive ? THEME_COLOR.PRIMARY_COLOR.green : THEME_COLOR.SECONDARY_COLOR.darkGray}
+            nameColor={isActive ? 'white' : THEME_COLOR.SECONDARY_COLOR.darkGray}
             onPress={() => handlePickCategory(slug)}
         />
     )

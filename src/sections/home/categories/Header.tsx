@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 15,
-        fontWeight: 600
+        fontWeight: 600,
+        color: THEME_COLOR.SECONDARY_COLOR.darkGray
     },
     btnText: {
         color: THEME_COLOR.PRIMARY_COLOR.green,

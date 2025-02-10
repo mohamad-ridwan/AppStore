@@ -1,11 +1,12 @@
 const PRIMARY_COLOR = {
-    green: '#12b30c',
+    green: '#48D861',
     gray: '#F1F1F1',
     yellowStar: '#FFD700'
 }
 
 const SECONDARY_COLOR = {
-    gray: '#666'
+    gray: '#666',
+    darkGray: '#2A2A2A'
 }
 
 export const THEME_COLOR = {

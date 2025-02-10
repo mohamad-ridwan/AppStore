@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import FastImage from 'react-native-fast-image'
 import Icon from 'react-native-vector-icons/Ionicons';
+import { THEME_COLOR } from "../../config/theme/theme-color";
 
 type Props = {
     name?: string
@@ -22,6 +23,8 @@ type Props = {
     nameWidth?: string | number
     imgUrl?: string
     imgBgColor?: string
+    priceColor?: string
+    rateColor?: string
 }
 
 export default function ProductCard({
@@ -43,7 +46,9 @@ export default function ProductCard({
     nameNumberOfLines,
     nameWidth,
     imgUrl,
-    imgBgColor
+    imgBgColor,
+    rateColor = THEME_COLOR.SECONDARY_COLOR.darkGray,
+    priceColor = THEME_COLOR.SECONDARY_COLOR.darkGray
 }: Props) {
     return (
         <View style={[
@@ -90,7 +95,10 @@ export default function ProductCard({
                             />
                         }
                         {rate &&
-                            <Text style={styles.rateText}>{rate}</Text>
+                            <Text style={[
+                                styles.rateText,
+                                { color: rateColor }
+                            ]}>{rate}</Text>
                         }
                     </View>
                 </View>
@@ -98,7 +106,8 @@ export default function ProductCard({
                     styles.price,
                     {
                         fontSize: priceFontSize,
-                        fontWeight: priceFontWeight as 600
+                        fontWeight: priceFontWeight as 600,
+                        color: priceColor
                     }
                 ]}>{price}</Text>
             </View>
