@@ -1,14 +1,27 @@
 import { memo } from "react";
-import { PixelRatio, StyleSheet, View } from "react-native";
+import { Dimensions, PixelRatio, StyleSheet, View } from "react-native";
 import FastImage from 'react-native-fast-image'
+import { SwiperFlatList } from 'react-native-swiper-flatlist';
+import { UseHome } from "../../hooks/UseHome";
 
 const Banner = memo(() => {
+    const { bannerData } = UseHome()
     return (
         <View style={styles.container}>
-            <FastImage
-                style={styles.image}
-                source={require('../../assets/images/banner.jpg')}
-                resizeMode={FastImage.resizeMode.cover}
+            <SwiperFlatList
+                autoplay
+                autoplayDelay={2}
+                autoplayLoop
+                data={bannerData}
+                renderItem={({ item }) => (
+                    <View style={styles.imgSwiperContainer}>
+                        <FastImage
+                            style={styles.image}
+                            source={{ uri: item }}
+                            resizeMode={FastImage.resizeMode.cover}
+                        />
+                    </View>
+                )}
             />
         </View>
     )
@@ -20,8 +33,11 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: PixelRatio.roundToNearestPixel(130),
-        paddingHorizontal: 10,
         paddingTop: 10,
+    },
+    imgSwiperContainer: {
+        width: Dimensions.get('screen').width,
+        paddingHorizontal: 10
     },
     image: {
         borderRadius: 15,
