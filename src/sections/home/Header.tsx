@@ -11,9 +11,10 @@ const Header = memo(() => {
                 nameIcon="bag-handle-outline"
                 btnBorderWidth={1}
                 btnBorderColor={THEME_COLOR.PRIMARY_COLOR.gray}
-                btnHeight={30}
-                btnWidth={30}
+                btnHeight={33}
+                btnWidth={33}
                 sizeIcon={16}
+                elevationContainer={0}
                 colorIcon={THEME_COLOR.SECONDARY_COLOR.darkGray}
             />
         </View>
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 16,
-        fontWeight: 'medium',
+        fontWeight: 600,
         color: THEME_COLOR.SECONDARY_COLOR.darkGray
     }
 })

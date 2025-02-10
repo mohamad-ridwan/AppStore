@@ -10,6 +10,7 @@ type Props = {
     btnBorderColor?: string
     sizeIcon?: number
     colorIcon?: string
+    elevationContainer?: number
 }
 
 export default function ButtonIcon({
@@ -20,8 +21,9 @@ export default function ButtonIcon({
     btnBorderWidth,
     btnBorderColor = 'gray',
     sizeIcon = 18,
-    colorIcon = 'gray'
-}: Props){
+    colorIcon = 'gray',
+    elevationContainer
+}: Props) {
     return (
         <View style={[
             styles.container,
@@ -30,7 +32,8 @@ export default function ButtonIcon({
                 width: btnWidth,
                 borderRadius: btnRadius,
                 borderWidth: btnBorderWidth,
-                borderColor: btnBorderColor
+                borderColor: btnBorderColor,
+                elevation: elevationContainer,
             }
         ]}>
             <TouchableOpacity style={styles.touch} activeOpacity={0.8}>
@@ -45,8 +48,11 @@ export default function ButtonIcon({
 }
 
 const styles = StyleSheet.create({
-    container:{},
-    touch:{
+    container: {
+        position: 'relative',
+        overflow: 'hidden'
+    },
+    touch: {
         height: '100%',
         width: '100%',
         justifyContent: 'center',
