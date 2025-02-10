@@ -1,5 +1,5 @@
 {
-  "name": "ReactNativeApp",
+  "name": "AppStore",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -25,6 +25,7 @@
     "react-native-reanimated": "^3.16.7",
     "react-native-safe-area-context": "^5.2.0",
     "react-native-screens": "^4.6.0",
+    "react-native-swiper-flatlist": "^3.2.5",
     "react-native-vector-icons": "^10.2.0",
     "react-redux": "^9.2.0",
     "reselect": "^5.1.1"

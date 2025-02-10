@@ -31,7 +31,7 @@ export default function TabBar({
         if (route.name === 'Home') {
             icon = isFocused ? 'home-sharp' : 'home-outline'
         } else if (route.name === 'Search') {
-            icon = isFocused ? 'search-circle' : 'search'
+            icon = isFocused ? 'search-circle' : 'search-outline'
         } else if (route.name === 'Favorite') {
             icon = isFocused ? 'heart-circle-sharp' : 'heart-outline'
         } else if (route.name === 'Profile') {
