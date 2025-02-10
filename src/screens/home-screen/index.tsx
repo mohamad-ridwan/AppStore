@@ -23,6 +23,7 @@ export default function HomeScreen() {
           data={data}
           renderItem={renderItem}
           keyExtractor={item => item.id}
+          maxToRenderPerBatch={5}
         />
       </SafeAreaView>
     </SafeAreaProvider>

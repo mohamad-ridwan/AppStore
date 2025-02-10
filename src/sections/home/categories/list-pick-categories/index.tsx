@@ -19,6 +19,7 @@ const ListPickCategories = memo(({
             renderItem={renderItem}
             keyExtractor={item => item.name}
             initialNumToRender={6}
+            maxToRenderPerBatch={6}
             ItemSeparatorComponent={() => <View style={{ width: 7 }} />}
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.container}

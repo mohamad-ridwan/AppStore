@@ -1,6 +1,7 @@
 const PRIMARY_COLOR = {
     green: '#12b30c',
-    gray: '#F1F1F1'
+    gray: '#F1F1F1',
+    yellowStar: '#FFD700'
 }
 
 const SECONDARY_COLOR = {

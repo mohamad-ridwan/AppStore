@@ -18,8 +18,10 @@ const ProductList = memo(({
                     <Fragment key={key}>
                         <ProductCard
                             name={product.title}
-                            rate="4.5"
+                            rate={`${product.rating}`}
                             nameNumberOfLines={2}
+                            icon="star"
+                            colorIcon={THEME_COLOR.PRIMARY_COLOR.yellowStar}
                             price={`$${product.price}`}
                             imgUrl={product.thumbnail}
                             imgBgColor={THEME_COLOR.PRIMARY_COLOR.gray}
@@ -28,7 +30,7 @@ const ProductList = memo(({
                             nameFontSize={12}
                             priceFontSize={13}
                             priceFontWeight={700}
-                            nameWidth="80%"
+                            nameWidth="75%"
                         />
                     </Fragment>
                 )
