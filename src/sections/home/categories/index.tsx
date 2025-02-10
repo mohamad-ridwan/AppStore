@@ -7,18 +7,19 @@ import ProductList from "../../../components/product-list";
 
 const Categories = memo(() => {
     const {
-        dataPickCategory,
-        renderItem
+        renderItem,
+        productsCategoriesState,
+        productsState
     } = UseCategories()
 
     return (
         <View style={styles.container}>
             <Header />
             <ListPickCategories
-                data={dataPickCategory}
+                productsCategories={productsCategoriesState}
                 renderItem={renderItem}
             />
-            <ProductList />
+            <ProductList products={productsState} />
         </View>
     )
 })

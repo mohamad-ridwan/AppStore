@@ -18,6 +18,10 @@ type Props = {
     gapContainer?: number
     priceFontSize?: number
     priceFontWeight?: number | string
+    nameNumberOfLines?: number
+    nameWidth?: string | number
+    imgUrl?: string
+    imgBgColor?: string
 }
 
 export default function ProductCard({
@@ -35,7 +39,11 @@ export default function ProductCard({
     nameFontSize = 13,
     gapContainer = 5,
     priceFontSize = 14,
-    priceFontWeight = 600
+    priceFontWeight = 600,
+    nameNumberOfLines,
+    nameWidth,
+    imgUrl,
+    imgBgColor
 }: Props) {
     return (
         <View style={[
@@ -51,11 +59,12 @@ export default function ProductCard({
                         height: heightImg as number,
                         width: widthImg as '100%',
                         maxHeight: maxHeightImg as '100%',
-                        borderRadius: imgRadius
+                        borderRadius: imgRadius,
+                        backgroundColor: imgBgColor
                     }
                 ]}
                 source={{
-                    uri: 'https://unsplash.it/400/400?image=1',
+                    uri: imgUrl,
                     headers: { Authorization: 'someAuthToken' },
                     priority: FastImage.priority.normal,
                 }}
@@ -66,9 +75,12 @@ export default function ProductCard({
                     <Text style={[
                         {
                             color: colorName,
-                            fontSize: nameFontSize
+                            fontSize: nameFontSize,
+                            width: nameWidth as number
                         }
-                    ]}>{name}</Text>
+                    ]}
+                        numberOfLines={nameNumberOfLines}
+                    >{name}</Text>
                     <View style={styles.rating}>
                         {icon &&
                             <Icon
@@ -102,7 +114,8 @@ const styles = StyleSheet.create({
     },
     nameInfo: {
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        alignItems: 'flex-start'
     },
     rating: {
         flexDirection: 'row',

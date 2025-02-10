@@ -1,29 +1,81 @@
 import { useCallback, useEffect, useState } from "react"
+import { useIsFocused } from "@react-navigation/native"
 import PickCategoryItem from "../sections/home/categories/list-pick-categories/PickCategoryItem"
 import { Category, ProductsCategoriesT } from "../types/store/products/productsSlice"
-import { useDispatch } from "react-redux"
-import { productsCategories } from "../store/products/productAction"
+import { shallowEqual, useDispatch, useSelector } from "react-redux"
+import { addProduct, addProductsCategories } from "../store/products/productsSlice"
+import { createSelector } from "reselect"
+import { RootState } from "../store"
+import { products, productsByCategory, productsCategories } from "../store/products/productAction"
 
 export default function UseCategories() {
     const [activeCategory, setActiveCategory] = useState<Category>(Category.All)
-    const [dataPickCategory, setDataPickCategory] = useState<ProductsCategoriesT[]>([])
     const [loadingCategories, setLoadingProducts] = useState<boolean>(true)
+    const [loadingProductsByCategory, setLoadingProductsByCategory] = useState<boolean>(true)
+
+    const productsCategoriesSlice: any = createSelector(
+        [(state: RootState) => state.productsSlice],
+        productSlice => {
+            return productSlice.productsCategories
+        }
+    )
+    const productSlice: any = createSelector(
+        [(state: RootState) => state.productsSlice],
+        productSlice => {
+            return productSlice.product
+        }
+    )
+    const productsCategoriesState = useSelector(productsCategoriesSlice, shallowEqual)
+    const productsState = useSelector(productSlice, shallowEqual)
 
     const dispatch = useDispatch() as any
+    const isFocused = useIsFocused()
 
     async function handleGetCategories(): Promise<void> {
         const categories = await dispatch(productsCategories())
-        if(categories.meta.requestStatus.rejected){
+        if (categories.meta.requestStatus.rejected) {
             setLoadingProducts(false)
             return
         }
-        setDataPickCategory(categories.payload)
+        dispatch(addProductsCategories([
+            {
+                slug: 'all',
+                name: 'All',
+                url: 'all'
+            },
+            ...categories.payload
+        ]))
         setLoadingProducts(false)
     }
 
+    // GET PRODUCTS CATEGORIES
     useEffect(() => {
         handleGetCategories()
     }, [])
+
+    const handleGetProductsByCategory = useCallback(async () => {
+        setLoadingProductsByCategory(true)
+        const productsData = activeCategory === Category.All ?
+            await dispatch(products())
+            :
+            await dispatch(productsByCategory(activeCategory))
+        if (!isFocused) {
+            setLoadingProductsByCategory(false)
+            return
+        }
+        if (
+            productsData.type === 'products/fulfilled' ||
+            productsData.type === 'products-by-categories/fulfilled'
+        ) {
+            dispatch(addProduct(productsData.payload))
+        }
+        setLoadingProductsByCategory(false)
+    }, [activeCategory, isFocused])
+
+    // GET PRODUCTS BY CATEGORY
+    useEffect(() => {
+        handleGetProductsByCategory()
+    }, [activeCategory])
 
     function handlePickCategory(type: Category) {
         setActiveCategory(type)
@@ -39,8 +91,10 @@ export default function UseCategories() {
     }, [activeCategory])
 
     return {
-        dataPickCategory,
         renderItem,
-        loadingCategories
+        productsCategoriesState,
+        loadingCategories,
+        productsState,
+        loadingProductsByCategory
     }
 }

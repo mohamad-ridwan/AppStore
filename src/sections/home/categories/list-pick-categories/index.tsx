@@ -4,18 +4,18 @@ import { View } from "react-native";
 import { ProductsCategoriesT } from "../../../../types/store/products/productsSlice";
 
 type Props = {
-    data: ProductsCategoriesT[]
+    productsCategories: ProductsCategoriesT[]
     renderItem: ListRenderItem<ProductsCategoriesT>
 }
 
 const ListPickCategories = memo(({
-    data,
+    productsCategories,
     renderItem
 }: Props) => {
     return (
         <FlatList
             horizontal
-            data={data}
+            data={productsCategories}
             renderItem={renderItem}
             keyExtractor={item => item.name}
             initialNumToRender={6}

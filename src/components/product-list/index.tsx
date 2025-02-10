@@ -1,40 +1,38 @@
-import { memo } from "react";
+import { Fragment, memo } from "react";
 import { PixelRatio, StyleSheet, View } from "react-native";
 import ProductCard from "../card/ProductCard";
+import { ProductsData } from "../../types/store/products/productsSlice";
+import { THEME_COLOR } from "../../config/theme/theme-color";
 
-const ProductList = memo(() => {
+type Props = {
+    products: ProductsData
+}
+
+const ProductList = memo(({
+    products
+}: Props) => {
     return (
         <View style={styles.container}>
-            <ProductCard
-                name="AirPods"
-                rate="4.5"
-                price="$132.00"
-                heightImg={PixelRatio.roundToNearestPixel(150)}
-                widthImg="100%"
-                nameFontSize={12}
-                priceFontSize={13}
-                priceFontWeight={700}
-            />
-            <ProductCard
-                name="AirPods"
-                rate="4.5"
-                price="$132.00"
-                heightImg={PixelRatio.roundToNearestPixel(150)}
-                widthImg="100%"
-                nameFontSize={12}
-                priceFontSize={13}
-                priceFontWeight={700}
-            />
-            <ProductCard
-                name="AirPods"
-                rate="4.5"
-                price="$132.00"
-                heightImg={PixelRatio.roundToNearestPixel(150)}
-                widthImg="100%"
-                nameFontSize={12}
-                priceFontSize={13}
-                priceFontWeight={700}
-            />
+            {products?.products && products.products.map((product, key) => {
+                return (
+                    <Fragment key={key}>
+                        <ProductCard
+                            name={product.title}
+                            rate="4.5"
+                            nameNumberOfLines={2}
+                            price={`$${product.price}`}
+                            imgUrl={product.thumbnail}
+                            imgBgColor={THEME_COLOR.PRIMARY_COLOR.gray}
+                            heightImg={PixelRatio.roundToNearestPixel(150)}
+                            widthImg="100%"
+                            nameFontSize={12}
+                            priceFontSize={13}
+                            priceFontWeight={700}
+                            nameWidth="80%"
+                        />
+                    </Fragment>
+                )
+            })}
         </View>
     )
 })

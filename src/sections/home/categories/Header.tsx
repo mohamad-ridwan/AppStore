@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from '@react-navigation/native';
+import { THEME_COLOR } from "../../../config/theme/theme-color";
 
 const Header = memo(() => {
     const navigation = useNavigation() as any
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
         fontWeight: 600
     },
     btnText: {
-        color: 'green',
+        color: THEME_COLOR.PRIMARY_COLOR.green,
         fontSize: 12,
     }
 })

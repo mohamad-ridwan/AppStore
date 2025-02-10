@@ -2,6 +2,7 @@ import { memo } from "react";
 import { PixelRatio, StyleSheet, View } from "react-native";
 import { ThemeMode } from "../../config/theme/theme-mode";
 import Input from "../input";
+import { THEME_COLOR } from "../../config/theme/theme-color";
 
 const SearchBar = memo(() => {
     const { backgroundStyle } = ThemeMode()
@@ -17,7 +18,7 @@ const SearchBar = memo(() => {
                 inputRadius={10}
                 inputBorderWidth={0}
                 icon="search-outline"
-                bgContainer={'#EEE'}
+                bgContainer={THEME_COLOR.PRIMARY_COLOR.gray}
                 iconSize={18}
                 topIcon={8}
                 inputFontSize={13}
