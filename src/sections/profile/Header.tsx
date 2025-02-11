@@ -1,11 +1,14 @@
 import { memo } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { ThemeMode } from "../../../config/theme/theme-mode";
+import { ThemeMode } from "../../config/theme/theme-mode";
 
 const Header = memo(() => {
     const { backgroundStyle } = ThemeMode()
     return (
-        <View style={styles.wrapper}>
+        <View style={[
+            styles.wrapper,
+            { backgroundColor: backgroundStyle.backgroundColor }
+        ]}>
             <Text style={[
                 styles.profileTitle,
                 { color: backgroundStyle.color }
