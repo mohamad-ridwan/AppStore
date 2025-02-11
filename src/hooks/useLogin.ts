@@ -6,6 +6,10 @@ import { UserState } from "../types/store/auth/authSlice"
 import { navigate } from "../navigation/RootNavigation"
 import { BackHandler } from "react-native"
 import { saveAccessToken } from "../services/storage-management/auth/saveAccessToken"
+import { saveLoginForm } from "../services/storage-management/login/saveLoginForm"
+import { resetLoginForm } from "../services/storage-management/login/resetLoginForm"
+import { useIsFocused } from "@react-navigation/native"
+import { getLoginForm } from "../services/storage-management/login/getLoginForm"
 
 export function useLogin() {
     const [form, setForm] = useState<ReqLoginUserT>({
@@ -23,6 +27,8 @@ export function useLogin() {
 
     const dispatch = useDispatch() as any
 
+    const isFocused = useIsFocused()
+
     useEffect(() => {
         const backAction = () => {
             return true;
@@ -35,6 +41,15 @@ export function useLogin() {
 
         return () => backHandler.remove();
     }, [])
+
+    useEffect(() => {
+        getLoginForm().then(res => {
+            if ((res as ReqLoginUserT)?.username) {
+                setForm(res as ReqLoginUserT)
+                setIsRememberMe(true)
+            }
+        })
+    }, [isFocused])
 
     function handleClickIcon(): void {
         setPasswordActive(!passwordActive)
@@ -65,6 +80,13 @@ export function useLogin() {
             setLoadingSubmit(false)
             return
         }
+
+        if (isRememberMe) {
+            await saveLoginForm(form)
+        } else {
+            await resetLoginForm()
+        }
+
         const result = await dispatch(loginUser(form))
         const { id } = result?.payload as UserState
         if (id) {
@@ -93,6 +115,7 @@ export function useLogin() {
         isDisableSubmit,
         loadingSubmit,
         isRememberMe,
-        setIsRememberMe
+        setIsRememberMe,
+        form
     }
 }

@@ -16,7 +16,8 @@ export default function LoginForm() {
         isDisableSubmit,
         loadingSubmit,
         isRememberMe,
-        setIsRememberMe
+        setIsRememberMe,
+        form
     } = useLogin()
 
     return (
@@ -27,6 +28,7 @@ export default function LoginForm() {
                 onChangeText={(value) => handleChangeInput('username', value)}
                 desc={errMsgInput.username}
                 descColor='red'
+                value={form.username}
             />
             <Input
                 title='Password'
@@ -37,6 +39,7 @@ export default function LoginForm() {
                 onChangeText={(value) => handleChangeInput('password', value)}
                 desc={errMsgInput.password}
                 descColor='red'
+                value={form.password}
             />
             <View style={styles.forgotPwContainer}>
                 <View style={styles.rememberMe}>
