@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { GestureResponderEvent, StyleSheet, Text, View } from "react-native";
 import { PlatformPressable } from '@react-navigation/elements';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { THEME_COLOR } from "../../config/theme/theme-color";
@@ -11,19 +11,21 @@ type Props = {
     splitIcon?: string
     nameFontSize?: number
     colorName?: string
+    onPress?: (event: GestureResponderEvent)=>void
 }
 
 export default function ButtonMenu({
     icon,
-    sizeIcon = 22,
+    sizeIcon = 20,
     colorIcon = THEME_COLOR.SECONDARY_COLOR.darkGray,
     btnName,
     splitIcon,
     nameFontSize = 14,
-    colorName = THEME_COLOR.SECONDARY_COLOR.darkGray
+    colorName = THEME_COLOR.SECONDARY_COLOR.darkGray,
+    onPress
 }: Props) {
     return (
-        <PlatformPressable style={styles.container}>
+        <PlatformPressable style={styles.container} onPress={onPress}>
             <View style={styles.btnInfo}>
                 {icon &&
                     <Icon
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 10,
-        paddingVertical: 5
+        paddingVertical: 10
     },
     btnInfo: {
         gap: 10,

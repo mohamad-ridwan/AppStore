@@ -7,7 +7,11 @@ import AccountSetting from "../../sections/profile/account-settings";
 import UseProfile from "../../hooks/UseProfile";
 
 export default function ProfileScreen() {
-    const { menuAccountSettings, userState } = UseProfile()
+    const {
+        menuAccountSettings,
+        userState,
+        handleLogOut,
+    } = UseProfile()
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView style={styles.scroll}>
@@ -15,7 +19,10 @@ export default function ProfileScreen() {
                     <Header />
                     <Profile user={userState} />
                 </View>
-                <AccountSetting menuAccountSettings={menuAccountSettings} />
+                <AccountSetting
+                    menuAccountSettings={menuAccountSettings}
+                    handleLogOut={handleLogOut}
+                />
             </ScrollView>
         </SafeAreaView>
     )

@@ -7,9 +7,13 @@ import { THEME_COLOR } from "../../../config/theme/theme-color";
 
 type Props = {
     menuAccountSettings: MenuAccountSettingsT[]
+    handleLogOut: () => void
 }
 
-const AccountSetting = memo(({ menuAccountSettings }: Props) => {
+const AccountSetting = memo(({
+    menuAccountSettings,
+    handleLogOut
+}: Props) => {
     const { backgroundStyle } = ThemeMode()
     return (
         <View style={[
@@ -30,6 +34,11 @@ const AccountSetting = memo(({ menuAccountSettings }: Props) => {
                             colorName={colorName}
                             icon={item.icon}
                             colorIcon={colorName}
+                            onPress={() => {
+                                if (item.name === 'Log Out') {
+                                    handleLogOut()
+                                }
+                            }}
                         />
                     )
                 })}
