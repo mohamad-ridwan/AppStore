@@ -19,6 +19,7 @@ export function useLogin() {
     })
     const [passwordActive, setPasswordActive] = useState<boolean>(false)
     const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false)
+    const [isRememberMe, setIsRememberMe] = useState<boolean>(false)
 
     const dispatch = useDispatch() as any
 
@@ -90,6 +91,8 @@ export function useLogin() {
         handleSubmit,
         errMsgInput,
         isDisableSubmit,
-        loadingSubmit
+        loadingSubmit,
+        isRememberMe,
+        setIsRememberMe
     }
 }

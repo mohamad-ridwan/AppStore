@@ -4,6 +4,7 @@ import Input from '../../../components/input';
 import Checkbox from '../../../components/checkbox';
 import BasicButton from '../../../components/button';
 import { useLogin } from '../../../hooks/useLogin';
+import { THEME_COLOR } from '../../../config/theme/theme-color';
 
 export default function LoginForm() {
     const {
@@ -13,7 +14,9 @@ export default function LoginForm() {
         handleSubmit,
         errMsgInput,
         isDisableSubmit,
-        loadingSubmit
+        loadingSubmit,
+        isRememberMe,
+        setIsRememberMe
     } = useLogin()
 
     return (
@@ -38,7 +41,9 @@ export default function LoginForm() {
             <View style={styles.forgotPwContainer}>
                 <View style={styles.rememberMe}>
                     <Checkbox
+                        isChecked={isRememberMe}
                         label='Remember me'
+                        onPress={(isChecked) => setIsRememberMe(isChecked)}
                     />
                 </View>
                 <TouchableOpacity activeOpacity={0.8}>
@@ -73,7 +78,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     forgotPw: {
-        color: 'purple',
+        color: THEME_COLOR.SECONDARY_COLOR.darkGray,
         fontSize: 13,
         fontWeight: 500
     }

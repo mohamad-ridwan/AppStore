@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from "react-native"
+import { THEME_COLOR } from "../../../config/theme/theme-color"
 
 export default function LoginHeader() {
     return (
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30
     },
     title: {
-        color: 'purple',
+        color: THEME_COLOR.SECONDARY_COLOR.darkGray,
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center'

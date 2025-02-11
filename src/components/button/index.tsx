@@ -1,5 +1,6 @@
 import { ActivityIndicator, GestureResponderEvent, PixelRatio, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { View } from "react-native";
+import { THEME_COLOR } from "../../config/theme/theme-color";
 
 type Props = {
     name: string
@@ -34,7 +35,7 @@ export default function BasicButton({
     touchPaddingHorizontal,
     fontSizeName,
     touchHeight = PixelRatio.roundToNearestPixel(45),
-    touchBgColor = 'purple',
+    touchBgColor = THEME_COLOR.PRIMARY_COLOR.green,
     touchBorderWidth,
     touchBorderColor,
     nameColor = '#fff',
