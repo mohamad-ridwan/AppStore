@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
-import { BackHandler } from "react-native";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Animated, BackHandler } from "react-native";
 import { HomeDataT } from "../types/sections/home";
 import Header from "../sections/home/Header";
 import SearchBar from "../components/search/SearchBar";
 import Banner from "../sections/home/Banner";
 import Categories from "../sections/home/categories";
+import { THEME_COLOR } from "../config/theme/theme-color";
 
 export function UseHome() {
     const [data, setData] = useState<HomeDataT[]>([
@@ -25,6 +26,19 @@ export function UseHome() {
             sectionType: 'CATEGORIES'
         },
     ])
+
+    const scrollY = useRef(new Animated.Value(0)).current;
+
+    const backgroundColor = scrollY.interpolate({
+        inputRange: [0, 50], // Adjust input range based on when you want opacity to change
+        outputRange: ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 1)'], // From transparent to opaque
+        extrapolate: 'clamp',
+    });
+    const borderColor = scrollY.interpolate({
+        inputRange: [0, 50], // Adjust input range based on when you want opacity to change
+        outputRange: ['rgba(241, 241, 241, 0)', THEME_COLOR.PRIMARY_COLOR.gray], // From transparent to opaque
+        extrapolate: 'clamp',
+    });
 
     const bannerData = [
         'https://laz-img-cdn.alicdn.com/images/ims-web/TB1LLFTsljTBKNjSZFuXXb0HFXa.jpg_1200x1200.jpg',
@@ -50,7 +64,10 @@ export function UseHome() {
     const renderItem = useCallback(({ item }: { item: HomeDataT }) => {
         if (item.sectionType === 'HEADER') {
             return (
-                <Header />
+                <Header
+                    backgroundColor={backgroundColor}
+                    borderColor={borderColor}
+                />
             )
         } else if (item.sectionType === 'SEARCH') {
             return <SearchBar />
@@ -65,6 +82,7 @@ export function UseHome() {
     return {
         data,
         renderItem,
-        bannerData
+        bannerData,
+        scrollY,
     }
 }

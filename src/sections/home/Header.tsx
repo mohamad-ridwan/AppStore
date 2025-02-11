@@ -1,11 +1,28 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Animated, StyleSheet, Text } from "react-native";
 import ButtonIcon from "../../components/button/ButtonIcon";
 import { memo } from "react";
 import { THEME_COLOR } from "../../config/theme/theme-color";
+import { ThemeMode } from "../../config/theme/theme-mode";
 
-const Header = memo(() => {
+type Props = {
+    backgroundColor: Animated.AnimatedInterpolation<string | number>
+    borderColor: Animated.AnimatedInterpolation<string | number>
+}
+
+const Header = memo(({
+    backgroundColor,
+    borderColor
+}: Props) => {
+    const { backgroundStyle } = ThemeMode()
     return (
-        <View style={styles.container}>
+        <Animated.View style={[
+            styles.container,
+            {
+                backgroundColor: backgroundColor,
+                borderBottomWidth: 1,
+                borderBottomColor: borderColor
+            }
+        ]}>
             <Text style={styles.title}>Discover</Text>
             <ButtonIcon
                 nameIcon="bag-handle-outline"
@@ -17,7 +34,7 @@ const Header = memo(() => {
                 elevationContainer={0}
                 colorIcon={THEME_COLOR.SECONDARY_COLOR.darkGray}
             />
-        </View>
+        </Animated.View>
     )
 })
 
