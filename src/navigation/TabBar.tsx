@@ -18,6 +18,11 @@ export default function TabBar({
 }: Props) {
     const { buildHref } = useLinkBuilder();
 
+    // HANDLE HIDE NAVIGATOR
+    if (state.index === 5) {
+        return <></>
+    }
+
     const currentData: TabBarT[] = state.routes.filter(
         (route: TabBarT) =>
             route.name === 'Home' ||
