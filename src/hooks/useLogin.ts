@@ -93,6 +93,12 @@ export function useLogin() {
             await saveAccessToken(result?.payload?.accessToken, result?.payload?.refreshToken)
             navigate('Home')
             setLoadingSubmit(false)
+            setForm({
+                username: '',
+                password: '',
+                expiresInMin: 30
+            })
+            setPasswordActive(false)
             return
         }
         setErrMsgInput((prev) => ({
