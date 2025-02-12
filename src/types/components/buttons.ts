@@ -1,0 +1,1 @@
+export type PressableT = 'platform-pressable' | 'touchable'

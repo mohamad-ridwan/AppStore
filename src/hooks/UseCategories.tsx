@@ -7,11 +7,19 @@ import { addProduct, addProductsCategories } from "../store/products/productsSli
 import { createSelector } from "reselect"
 import { RootState } from "../store"
 import { products, productsByCategory, productsCategories } from "../store/products/productAction"
+import { HomeDataT } from "../types/sections/home"
+import HeaderBar from "../components/header-bar"
 
 export default function UseCategories() {
     const [activeCategory, setActiveCategory] = useState<Category>(Category.All)
     const [loadingCategories, setLoadingProducts] = useState<boolean>(true)
     const [loadingProductsByCategory, setLoadingProductsByCategory] = useState<boolean>(true)
+    const [categoriesScreenDataElement] = useState<HomeDataT[]>([
+        {
+            id: '1',
+            sectionType: 'HEADER'
+        },
+    ])
 
     const productsCategoriesSlice: any = createSelector(
         [(state: RootState) => state.productsSlice],
@@ -90,11 +98,22 @@ export default function UseCategories() {
         />
     }, [activeCategory])
 
+    const renderItemCategoriesScreen = useCallback(({ item }: { item: HomeDataT }) => {
+        if (item.sectionType === 'HEADER') {
+            return (
+                <HeaderBar headerName="Categories" />
+            )
+        }
+        return null
+    }, [])
+
     return {
         renderItem,
         productsCategoriesState,
         loadingCategories,
         productsState,
-        loadingProductsByCategory
+        loadingProductsByCategory,
+        renderItemCategoriesScreen,
+        categoriesScreenDataElement
     }
 }

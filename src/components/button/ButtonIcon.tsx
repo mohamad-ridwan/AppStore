@@ -1,5 +1,7 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
+import { PressableT } from "../../types/components/buttons";
+import ContainerPressButton from "./ContainerPressButton";
 
 type Props = {
     nameIcon: string,
@@ -11,6 +13,8 @@ type Props = {
     sizeIcon?: number
     colorIcon?: string
     elevationContainer?: number
+    pressableType?: PressableT
+    pressableBgColor?: string
 }
 
 export default function ButtonIcon({
@@ -22,7 +26,9 @@ export default function ButtonIcon({
     btnBorderColor = 'gray',
     sizeIcon = 18,
     colorIcon = 'gray',
-    elevationContainer
+    elevationContainer,
+    pressableType = 'touchable',
+    pressableBgColor
 }: Props) {
     return (
         <View style={[
@@ -36,13 +42,16 @@ export default function ButtonIcon({
                 elevation: elevationContainer,
             }
         ]}>
-            <TouchableOpacity style={styles.touch} activeOpacity={0.8}>
+            <ContainerPressButton
+                pressableType={pressableType}
+                backgroundColor={pressableBgColor}
+            >
                 <Icon
                     name={nameIcon}
                     size={sizeIcon}
                     color={colorIcon}
                 />
-            </TouchableOpacity>
+            </ContainerPressButton>
         </View>
     )
 }
@@ -52,10 +61,4 @@ const styles = StyleSheet.create({
         position: 'relative',
         overflow: 'hidden'
     },
-    touch: {
-        height: '100%',
-        width: '100%',
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
 })
