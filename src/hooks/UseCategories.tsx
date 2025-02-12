@@ -39,7 +39,7 @@ export default function UseCategories() {
     const dispatch = useDispatch() as any
     const isFocused = useIsFocused()
 
-    async function handleGetCategories(): Promise<void> {
+    const handleGetCategories = useCallback(async () => {
         const categories = await dispatch(productsCategories())
         if (categories.meta.requestStatus.rejected) {
             setLoadingProducts(false)
@@ -54,7 +54,7 @@ export default function UseCategories() {
             ...categories.payload
         ]))
         setLoadingProducts(false)
-    }
+    }, [])
 
     // GET PRODUCTS CATEGORIES
     useEffect(() => {
@@ -85,9 +85,9 @@ export default function UseCategories() {
         handleGetProductsByCategory()
     }, [activeCategory])
 
-    function handlePickCategory(type: Category) {
+    const handlePickCategory = useCallback((type: Category) => {
         setActiveCategory(type)
-    }
+    }, [])
 
     const renderItem = useCallback(({ item }: { item: ProductsCategoriesT }) => {
         return <PickCategoryItem

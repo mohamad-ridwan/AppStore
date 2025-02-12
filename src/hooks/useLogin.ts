@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { ReqLoginUserT } from "../types/store/auth/authAction"
 import { useDispatch } from "react-redux"
 import { loginUser } from "../store/auth/authAction"
@@ -51,18 +51,18 @@ export function useLogin() {
         })
     }, [isFocused])
 
-    function handleClickIcon(): void {
+    const handleClickIcon = useCallback((): void => {
         setPasswordActive(!passwordActive)
-    }
+    }, [passwordActive])
 
-    function handleChangeInput(name: 'username' | 'password', value: string): void {
+    const handleChangeInput = useCallback((name: 'username' | 'password', value: string): void => {
         setForm((prev) => ({
             ...prev,
             [name]: value
         }))
-    }
+    }, [])
 
-    function formValidation(err: ReqLoginUserT): ReqLoginUserT {
+    const formValidation = useCallback((err: ReqLoginUserT): ReqLoginUserT => {
         const { username, password } = form
         if (!username || !username.trim()) {
             err.username = 'username required'
@@ -71,9 +71,9 @@ export function useLogin() {
             err.password = 'password required'
         }
         return err
-    }
+    }, [form])
 
-    async function handleSubmit(): Promise<void> {
+    const handleSubmit = useCallback(async (): Promise<void> => {
         setLoadingSubmit(true)
         if (Object.keys(formValidation({ username: ' ', password: ' ' } as ReqLoginUserT))?.length === 0) {
             setErrMsgInput(formValidation({ username: ' ', password: ' ' }))
@@ -106,7 +106,7 @@ export function useLogin() {
             password: 'Account not registered'
         }))
         setLoadingSubmit(false)
-    }
+    }, [isRememberMe, form])
 
     const isDisableSubmit = useMemo(() => {
         return loadingSubmit || Object.keys(formValidation({} as ReqLoginUserT))?.length !== 0

@@ -6,6 +6,7 @@ import { UserState } from "../types/store/auth/authSlice"
 import { MenuAccountSettingsT } from "../types/sections/profile"
 import { resetAccessToken } from "../services/storage-management/auth/resetAccessToken"
 import { resetUser } from "../store/auth/authSlice";
+import { useCallback } from "react";
 
 export default function UseProfile() {
     const dispatch = useDispatch() as any
@@ -19,12 +20,12 @@ export default function UseProfile() {
     )
     const userState = useSelector(userSlice, shallowEqual) as UserState
 
-    async function handleLogOut(): Promise<void> {
+    const handleLogOut = useCallback(async(): Promise<void>=> {
         await resetAccessToken()
         dispatch(resetUser())
         
         navigation.navigate('Login' as never)
-    }
+    }, [])
 
     const menuAccountSettings: MenuAccountSettingsT[] = [
         { name: 'Profile Info', icon: 'person-outline' },
