@@ -7,7 +7,7 @@ const Header = memo(() => {
     const navigation = useNavigation() as any
 
     function pressSeeAll(): void {
-        navigation.navigate('AllProducts')
+        navigation.navigate('Categories')
     }
 
     return (
