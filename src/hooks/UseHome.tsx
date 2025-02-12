@@ -6,6 +6,8 @@ import SearchBar from "../components/search/SearchBar";
 import Banner from "../sections/home/Banner";
 import Categories from "../sections/home/categories";
 import { THEME_COLOR } from "../config/theme/theme-color";
+import { useDispatch } from "react-redux";
+import { getCartByUser } from "../store/cart/cartAction";
 
 export function UseHome() {
     const [data, setData] = useState<HomeDataT[]>([
@@ -29,6 +31,8 @@ export function UseHome() {
 
     const scrollY = useRef(new Animated.Value(0)).current;
 
+    const dispatch = useDispatch() as any
+
     const backgroundColor = scrollY.interpolate({
         inputRange: [0, 50], // Adjust input range based on when you want opacity to change
         outputRange: ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 1)'], // From transparent to opaque
@@ -48,6 +52,7 @@ export function UseHome() {
         'https://images.unsplash.com/photo-1497215842964-222b430dc094?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
     ]
 
+    // HANDLE (AUTH) WHEN BACK PRESS
     useEffect(() => {
         const backAction = () => {
             return true;
@@ -59,6 +64,11 @@ export function UseHome() {
         );
 
         return () => backHandler.remove();
+    }, [])
+
+    // HANDLE FETCH CART DATA
+    useEffect(() => {
+        dispatch(getCartByUser(6))
     }, [])
 
     const renderItem = useCallback(({ item }: { item: HomeDataT }) => {
