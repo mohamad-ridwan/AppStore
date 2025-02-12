@@ -1,8 +1,8 @@
 import { Animated, StyleSheet, Text } from "react-native";
-import ButtonIcon from "../../components/button/ButtonIcon";
+import ButtonIcon from "../../../components/button/ButtonIcon";
 import { memo } from "react";
-import { THEME_COLOR } from "../../config/theme/theme-color";
-import { ThemeMode } from "../../config/theme/theme-mode";
+import { THEME_COLOR } from "../../../config/theme/theme-color";
+import { ThemeMode } from "../../../config/theme/theme-mode";
 
 type Props = {
     backgroundColor: Animated.AnimatedInterpolation<string | number>

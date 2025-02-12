@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Animated, BackHandler } from "react-native";
 import { HomeDataT } from "../types/sections/home";
-import Header from "../sections/home/Header";
+import Header from "../sections/home/header";
 import SearchBar from "../components/search/SearchBar";
 import Banner from "../sections/home/Banner";
 import Categories from "../sections/home/categories";
