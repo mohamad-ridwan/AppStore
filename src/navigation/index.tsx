@@ -8,6 +8,7 @@ import TabNavigator from './TabNavigator';
 import SearchScreen from '../screens/search-screen';
 import ProfileScreen from '../screens/profile-screen';
 import FavoriteScreen from '../screens/favorite-screen';
+import CategoriesScreen from '../screens/categories-screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,11 @@ export default function Navigation() {
                 <Stack.Screen
                     name="Profile"
                     component={ProfileScreen}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Categories"
+                    component={CategoriesScreen}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
