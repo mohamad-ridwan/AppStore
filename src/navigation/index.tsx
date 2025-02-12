@@ -5,7 +5,6 @@ import HomeScreen from '../screens/home-screen';
 import LoginScreen from '../screens/login-screen';
 import { navigationRef } from './RootNavigation';
 import TabNavigator from './TabNavigator';
-import AllProductsScreen from '../screens/all-products-screen';
 import SearchScreen from '../screens/search-screen';
 import ProfileScreen from '../screens/profile-screen';
 import FavoriteScreen from '../screens/favorite-screen';
@@ -34,11 +33,6 @@ export default function Navigation() {
                 <Stack.Screen
                     name="Profile"
                     component={ProfileScreen}
-                    options={{ headerShown: false }}
-                />
-                <Stack.Screen
-                    name="AllProducts"
-                    component={AllProductsScreen}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
