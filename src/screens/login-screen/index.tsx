@@ -3,9 +3,14 @@ import { StyleSheet, SafeAreaView, KeyboardAvoidingView, Platform } from 'react-
 import LoginHeader from '../../sections/login/header'
 import LoginForm from '../../sections/login/form'
 import BasicStatusBar from '../../components/header-bar/BasicStatusBar'
+import { ThemeMode } from '../../config/theme/theme-mode'
 export default function LoginScreen() {
+  const { backgroundStyle } = ThemeMode()
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[
+      styles.container,
+      { backgroundColor: backgroundStyle.backgroundColor }
+    ]}>
       <BasicStatusBar />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
