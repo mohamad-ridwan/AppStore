@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { useIsFocused, useNavigation } from "@react-navigation/native"
 import PickCategoryItem from "../sections/home/categories/list-pick-categories/PickCategoryItem"
 import { Category, ProductsCategoriesT } from "../types/store/products/productsSlice"
@@ -9,6 +9,7 @@ import { RootState } from "../store"
 import { products, productsByCategory, productsCategories } from "../store/products/productAction"
 import { HomeDataT } from "../types/sections/home"
 import HeaderBar from "../components/header-bar"
+import ListCategories from "../sections/categories/lists"
 
 export default function UseCategories() {
     const [activeCategory, setActiveCategory] = useState<Category>(Category.All)
@@ -18,6 +19,10 @@ export default function UseCategories() {
         {
             id: '1',
             sectionType: 'HEADER'
+        },
+        {
+            id: '2',
+            sectionType: 'CATEGORIES'
         },
     ])
 
@@ -33,12 +38,22 @@ export default function UseCategories() {
             return productSlice.product
         }
     )
-    const productsCategoriesState = useSelector(productsCategoriesSlice, shallowEqual)
+    const productsCategoriesState = useSelector(productsCategoriesSlice, shallowEqual) as ProductsCategoriesT[]
     const productsState = useSelector(productSlice, shallowEqual)
 
     const dispatch = useDispatch() as any
     const isFocused = useIsFocused()
     const navigation = useNavigation()
+
+    const categoriesByScreenData = useMemo((): ProductsCategoriesT[] => {
+        if (productsCategoriesState?.length > 0) {
+            return productsCategoriesState.map((item) => ({
+                ...item,
+                img: 'https://images.unsplash.com/photo-1553456558-aff63285bdd1?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+            }))
+        }
+        return []
+    }, [productsCategoriesState])
 
     const handleGetCategories = useCallback(async () => {
         const categories = await dispatch(productsCategories())
@@ -108,9 +123,13 @@ export default function UseCategories() {
             return (
                 <HeaderBar headerName="Categories" onBackPress={(event) => handleBackPress('Home')} />
             )
+        } else if (item.sectionType === 'CATEGORIES') {
+            return (
+                <ListCategories productsCategoriesState={categoriesByScreenData} />
+            )
         }
         return null
-    }, [])
+    }, [categoriesByScreenData])
 
     return {
         renderItem,

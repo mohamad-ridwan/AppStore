@@ -2,6 +2,7 @@ import { GestureResponderEvent, StyleSheet, View } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
 import { PressableT } from "../../types/components/buttons";
 import ContainerPressButton from "./ContainerPressButton";
+import FastImage from "react-native-fast-image";
 
 type Props = {
     nameIcon: string,
@@ -15,7 +16,10 @@ type Props = {
     elevationContainer?: number
     pressableType?: PressableT
     pressableBgColor?: string
-    onPress?: (event: GestureResponderEvent)=>void
+    onPress?: (event: GestureResponderEvent) => void
+    renderImage?: 'icon' | 'image'
+    imgUrl?: string
+    imgRadius?: number
 }
 
 export default function ButtonIcon({
@@ -30,7 +34,10 @@ export default function ButtonIcon({
     elevationContainer,
     pressableType = 'touchable',
     pressableBgColor,
-    onPress
+    onPress,
+    renderImage = 'icon',
+    imgUrl,
+    imgRadius = 18 / 2
 }: Props) {
     return (
         <View style={[
@@ -49,11 +56,24 @@ export default function ButtonIcon({
                 backgroundColor={pressableBgColor}
                 onPress={onPress}
             >
-                <Icon
-                    name={nameIcon}
-                    size={sizeIcon}
-                    color={colorIcon}
-                />
+                {renderImage === 'icon' ?
+                    <Icon
+                        name={nameIcon}
+                        size={sizeIcon}
+                        color={colorIcon}
+                    /> :
+                    renderImage === 'image' ?
+                        <FastImage
+                            source={{ uri: imgUrl }}
+                            style={{
+                                height: sizeIcon,
+                                width: sizeIcon,
+                                borderRadius: imgRadius
+                            }}
+                            resizeMode={FastImage.resizeMode.cover}
+                        />
+                        : null
+                }
             </ContainerPressButton>
         </View>
     )

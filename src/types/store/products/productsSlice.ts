@@ -104,4 +104,5 @@ export interface ProductsCategoriesT {
     slug: Category
     name: string;
     url: string;
+    img?: string
 }

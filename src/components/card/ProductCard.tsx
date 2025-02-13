@@ -70,7 +70,6 @@ export default function ProductCard({
                 ]}
                 source={{
                     uri: imgUrl,
-                    headers: { Authorization: 'someAuthToken' },
                     priority: FastImage.priority.normal,
                 }}
                 resizeMode={FastImage.resizeMode.cover}
