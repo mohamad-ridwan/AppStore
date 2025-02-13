@@ -10,20 +10,25 @@ type Props = {
     scrollY: Animated.Value
 }
 
-const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
-
 const Content = memo(({
     data,
     renderItem,
     scrollY
 }: Props) => {
     return (
-        <AnimatedFlatList
+        <FlatList
             data={data}
             renderItem={renderItem as any}
             keyExtractor={(item: any) => item.id}
             maxToRenderPerBatch={3}
             initialNumToRender={5}
+            windowSize={3}
+            viewabilityConfig={{
+                waitForInteraction: true,
+                viewAreaCoveragePercentThreshold: 20,
+                minimumViewTime: 250,
+                itemVisiblePercentThreshold: 20
+            }}
             stickyHeaderIndices={[0]}
             onScroll={Animated.event(
                 [{ nativeEvent: { contentOffset: { y: scrollY } } }],

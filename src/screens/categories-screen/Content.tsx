@@ -22,6 +22,13 @@ const Content = memo(({
             maxToRenderPerBatch={3}
             initialNumToRender={5}
             stickyHeaderIndices={[0]}
+            windowSize={3}
+            viewabilityConfig={{
+                waitForInteraction: true,
+                viewAreaCoveragePercentThreshold: 20,
+                minimumViewTime: 250,
+                itemVisiblePercentThreshold: 20
+            }}
         />
     )
 })
