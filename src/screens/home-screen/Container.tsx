@@ -2,6 +2,7 @@ import { memo, ReactNode } from "react";
 import { StyleSheet } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { ThemeMode } from "../../config/theme/theme-mode";
+import BasicStatusBar from "../../components/header-bar/BasicStatusBar";
 
 type Props = {
     children: ReactNode
@@ -16,6 +17,7 @@ const Container = memo(({ children }: Props) => {
                 styles.container,
                 { backgroundColor: backgroundStyle.backgroundColor }
             ]}>
+                <BasicStatusBar />
                 {children}
             </SafeAreaView>
         </SafeAreaProvider>

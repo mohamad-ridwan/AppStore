@@ -1,10 +1,9 @@
-import { SafeAreaView } from "react-native-safe-area-context";
 import Profile from "../../sections/profile/profile";
-import { ScrollView, StyleSheet, View } from "react-native";
-import { THEME_COLOR } from "../../config/theme/theme-color";
+import { View } from "react-native";
 import Header from "../../sections/profile/Header";
 import AccountSetting from "../../sections/profile/account-settings";
 import UseProfile from "../../hooks/UseProfile";
+import Container from "./Container";
 
 export default function ProfileScreen() {
     const {
@@ -13,26 +12,15 @@ export default function ProfileScreen() {
         handleLogOut,
     } = UseProfile()
     return (
-        <SafeAreaView style={styles.container}>
-            <ScrollView style={styles.scroll}>
-                <View>
-                    <Header />
-                    <Profile user={userState} />
-                </View>
-                <AccountSetting
-                    menuAccountSettings={menuAccountSettings}
-                    handleLogOut={handleLogOut}
-                />
-            </ScrollView>
-        </SafeAreaView>
+        <Container>
+            <View>
+                <Header />
+                <Profile user={userState} />
+            </View>
+            <AccountSetting
+                menuAccountSettings={menuAccountSettings}
+                handleLogOut={handleLogOut}
+            />
+        </Container>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    scroll: {
-        backgroundColor: THEME_COLOR.PRIMARY_COLOR.gray,
-    }
-})

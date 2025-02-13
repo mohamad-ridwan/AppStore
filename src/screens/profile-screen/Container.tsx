@@ -1,23 +1,23 @@
 import { memo, ReactNode } from "react";
+import { ScrollView, StyleSheet } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { ThemeMode } from "../../config/theme/theme-mode";
-import { StyleSheet } from "react-native";
+import { THEME_COLOR } from "../../config/theme/theme-color";
 import BasicStatusBar from "../../components/header-bar/BasicStatusBar";
 
 type Props = {
     children: ReactNode
 }
 
-const Container = memo(({ children }: Props) => {
-    const { backgroundStyle } = ThemeMode()
+const Container = memo(({
+    children
+}: Props) => {
     return (
         <SafeAreaProvider>
-            <SafeAreaView style={[
-                styles.container,
-                { backgroundColor: backgroundStyle.backgroundColor }
-            ]}>
+            <SafeAreaView style={styles.container}>
                 <BasicStatusBar />
-                {children}
+                <ScrollView style={styles.scroll}>
+                    {children}
+                </ScrollView>
             </SafeAreaView>
         </SafeAreaProvider>
     )
@@ -27,6 +27,9 @@ export default Container
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
+    },
+    scroll: {
+        backgroundColor: THEME_COLOR.PRIMARY_COLOR.gray,
     }
 })
