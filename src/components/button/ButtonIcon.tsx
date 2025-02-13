@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { GestureResponderEvent, StyleSheet, View } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
 import { PressableT } from "../../types/components/buttons";
 import ContainerPressButton from "./ContainerPressButton";
@@ -15,6 +15,7 @@ type Props = {
     elevationContainer?: number
     pressableType?: PressableT
     pressableBgColor?: string
+    onPress?: (event: GestureResponderEvent)=>void
 }
 
 export default function ButtonIcon({
@@ -28,7 +29,8 @@ export default function ButtonIcon({
     colorIcon = 'gray',
     elevationContainer,
     pressableType = 'touchable',
-    pressableBgColor
+    pressableBgColor,
+    onPress
 }: Props) {
     return (
         <View style={[
@@ -45,6 +47,7 @@ export default function ButtonIcon({
             <ContainerPressButton
                 pressableType={pressableType}
                 backgroundColor={pressableBgColor}
+                onPress={onPress}
             >
                 <Icon
                     name={nameIcon}

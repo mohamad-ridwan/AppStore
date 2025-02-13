@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react"
-import { useIsFocused } from "@react-navigation/native"
+import { useIsFocused, useNavigation } from "@react-navigation/native"
 import PickCategoryItem from "../sections/home/categories/list-pick-categories/PickCategoryItem"
 import { Category, ProductsCategoriesT } from "../types/store/products/productsSlice"
 import { shallowEqual, useDispatch, useSelector } from "react-redux"
@@ -38,6 +38,7 @@ export default function UseCategories() {
 
     const dispatch = useDispatch() as any
     const isFocused = useIsFocused()
+    const navigation = useNavigation()
 
     const handleGetCategories = useCallback(async () => {
         const categories = await dispatch(productsCategories())
@@ -98,10 +99,14 @@ export default function UseCategories() {
         />
     }, [activeCategory])
 
+    const handleBackPress = useCallback((screenName: string) => {
+        navigation.navigate(screenName as never)
+    }, [])
+
     const renderItemCategoriesScreen = useCallback(({ item }: { item: HomeDataT }) => {
         if (item.sectionType === 'HEADER') {
             return (
-                <HeaderBar headerName="Categories" />
+                <HeaderBar headerName="Categories" onBackPress={(event) => handleBackPress('Home')} />
             )
         }
         return null

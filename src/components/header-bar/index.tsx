@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { PixelRatio, StyleSheet, Text, View } from "react-native";
+import { GestureResponderEvent, PixelRatio, StyleSheet, Text, View } from "react-native";
 import { ThemeMode } from "../../config/theme/theme-mode";
 import ButtonIcon from "../button/ButtonIcon";
 import { THEME_COLOR } from "../../config/theme/theme-color";
@@ -7,11 +7,13 @@ import { THEME_COLOR } from "../../config/theme/theme-color";
 type Props = {
     headerName?: string
     fontWeight?: number
+    onBackPress?: (event: GestureResponderEvent)=>void
 }
 
 const HeaderBar = memo(({
     headerName,
-    fontWeight = 600
+    fontWeight = 600,
+    onBackPress
 }: Props) => {
     const { backgroundStyle } = ThemeMode()
     return (
@@ -25,6 +27,7 @@ const HeaderBar = memo(({
                     pressableType="platform-pressable"
                     pressableBgColor={THEME_COLOR.PRIMARY_COLOR.gray}
                     colorIcon={THEME_COLOR.SECONDARY_COLOR.darkGray}
+                    onPress={onBackPress}
                 />
             </View>
             <View style={styles.titleContainer}>
