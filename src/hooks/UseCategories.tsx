@@ -118,6 +118,10 @@ export default function UseCategories() {
         navigation.navigate(screenName as never)
     }, [])
 
+    const handleNavigate = useCallback((...params: any) => {
+        navigation.navigate(...params as never)
+    }, [])
+
     const renderItemCategoriesScreen = useCallback(({ item }: { item: HomeDataT }) => {
         if (item.sectionType === 'HEADER') {
             return (
@@ -125,7 +129,10 @@ export default function UseCategories() {
             )
         } else if (item.sectionType === 'CATEGORIES') {
             return (
-                <ListCategories productsCategoriesState={categoriesByScreenData} />
+                <ListCategories
+                    productsCategoriesState={categoriesByScreenData}
+                    handleNavigate={handleNavigate}
+                />
             )
         }
         return null
@@ -138,6 +145,7 @@ export default function UseCategories() {
         productsState,
         loadingProductsByCategory,
         renderItemCategoriesScreen,
-        categoriesScreenDataElement
+        categoriesScreenDataElement,
+        handleNavigate
     }
 }

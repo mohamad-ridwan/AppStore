@@ -21,7 +21,7 @@ export default function TabBar({
     const { backgroundStyle } = ThemeMode()
 
     // HANDLE HIDE NAVIGATOR
-    if (state.index === 5) {
+    if (state.index === 6) {
         return <></>
     }
 

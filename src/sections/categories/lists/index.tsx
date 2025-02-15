@@ -7,10 +7,12 @@ import { THEME_COLOR } from "../../../config/theme/theme-color";
 
 type Props = {
     productsCategoriesState: ProductsCategoriesT[]
+    handleNavigate: (...params: any) => void
 }
 
 const ListCategories = memo(({
-    productsCategoriesState
+    productsCategoriesState,
+    handleNavigate
 }: Props) => {
     const { backgroundStyle } = ThemeMode()
     return (
@@ -32,6 +34,7 @@ const ListCategories = memo(({
                             imgRadius={40 / 2}
                             btnBorderColor={THEME_COLOR.PRIMARY_COLOR.gray}
                             btnBorderWidth={1}
+                            onPress={() => handleNavigate('ProductsByCategory', { slug: item.slug })}
                         />
                         <Text
                             style={styles.name}
