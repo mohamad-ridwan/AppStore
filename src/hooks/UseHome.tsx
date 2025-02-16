@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { Animated, BackHandler } from "react-native";
 import { HomeDataT } from "../types/sections/home";
 import Header from "../sections/home/header";
@@ -9,26 +9,34 @@ import { THEME_COLOR } from "../config/theme/theme-color";
 import { useDispatch } from "react-redux";
 import { getCartByUser } from "../store/cart/cartAction";
 
-export function UseHome() {
-    const [data, setData] = useState<HomeDataT[]>([
-        {
-            id: '1',
-            sectionType: 'HEADER'
-        },
-        {
-            id: '2',
-            sectionType: 'SEARCH'
-        },
-        {
-            id: '3',
-            sectionType: 'TOP-BANNER'
-        },
-        {
-            id: '4',
-            sectionType: 'CATEGORIES'
-        },
-    ])
+const data: HomeDataT[] = [
+    {
+        id: '1',
+        sectionType: 'HEADER'
+    },
+    {
+        id: '2',
+        sectionType: 'SEARCH'
+    },
+    {
+        id: '3',
+        sectionType: 'TOP-BANNER'
+    },
+    {
+        id: '4',
+        sectionType: 'CATEGORIES'
+    },
+]
 
+const bannerData = [
+    'https://laz-img-cdn.alicdn.com/images/ims-web/TB1LLFTsljTBKNjSZFuXXb0HFXa.jpg_1200x1200.jpg',
+    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1510074377623-8cf13fb86c08?q=80&w=2372&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2532&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1497215842964-222b430dc094?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+]
+
+export function UseHome() {
     const scrollY = useRef(new Animated.Value(0)).current;
 
     const dispatch = useDispatch() as any
@@ -43,14 +51,6 @@ export function UseHome() {
         outputRange: ['rgba(241, 241, 241, 0)', THEME_COLOR.PRIMARY_COLOR.gray], // From transparent to opaque
         extrapolate: 'clamp',
     });
-
-    const bannerData = [
-        'https://laz-img-cdn.alicdn.com/images/ims-web/TB1LLFTsljTBKNjSZFuXXb0HFXa.jpg_1200x1200.jpg',
-        'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        'https://images.unsplash.com/photo-1510074377623-8cf13fb86c08?q=80&w=2372&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2532&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        'https://images.unsplash.com/photo-1497215842964-222b430dc094?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-    ]
 
     // HANDLE (AUTH) WHEN BACK PRESS
     useEffect(() => {

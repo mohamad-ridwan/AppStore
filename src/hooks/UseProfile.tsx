@@ -8,6 +8,12 @@ import { resetAccessToken } from "../services/storage-management/auth/resetAcces
 import { resetUser } from "../store/auth/authSlice";
 import { useCallback } from "react";
 
+const menuAccountSettings: MenuAccountSettingsT[] = [
+    { name: 'Profile Info', icon: 'person-outline' },
+    { name: 'Password & Security', icon: 'key-outline' },
+    { name: 'Log Out', icon: 'log-out-outline' },
+]
+
 export default function UseProfile() {
     const dispatch = useDispatch() as any
     const navigation = useNavigation()
@@ -26,12 +32,6 @@ export default function UseProfile() {
         
         navigation.navigate('Login' as never)
     }, [])
-
-    const menuAccountSettings: MenuAccountSettingsT[] = [
-        { name: 'Profile Info', icon: 'person-outline' },
-        { name: 'Password & Security', icon: 'key-outline' },
-        { name: 'Log Out', icon: 'log-out-outline' },
-    ]
 
     return {
         userState,

@@ -11,20 +11,32 @@ import { HomeDataT } from "../types/sections/home"
 import HeaderBar from "../components/header-bar"
 import ListCategories from "../sections/categories/lists"
 
+const categoriesScreenDataElement: HomeDataT[] = [
+    {
+        id: '1',
+        sectionType: 'HEADER'
+    },
+    {
+        id: '2',
+        sectionType: 'CATEGORIES'
+    },
+]
+// PRODUCTS BY CATEGORY SCREEN DATA ELEMENT
+const productsByCSDataElement: HomeDataT[] = [
+    {
+        id: '1',
+        sectionType: 'HEADER'
+    },
+    {
+        id: '2',
+        sectionType: 'CATEGORIES'
+    },
+]
+
 export default function UseCategories() {
     const [activeCategory, setActiveCategory] = useState<Category>(Category.All)
     const [loadingCategories, setLoadingProducts] = useState<boolean>(true)
     const [loadingProductsByCategory, setLoadingProductsByCategory] = useState<boolean>(true)
-    const [categoriesScreenDataElement] = useState<HomeDataT[]>([
-        {
-            id: '1',
-            sectionType: 'HEADER'
-        },
-        {
-            id: '2',
-            sectionType: 'CATEGORIES'
-        },
-    ])
 
     const productsCategoriesSlice: any = createSelector(
         [(state: RootState) => state.productsSlice],
@@ -146,6 +158,7 @@ export default function UseCategories() {
         loadingProductsByCategory,
         renderItemCategoriesScreen,
         categoriesScreenDataElement,
-        handleNavigate
+        handleNavigate,
+        productsByCSDataElement
     }
 }
