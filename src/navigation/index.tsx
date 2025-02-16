@@ -44,7 +44,7 @@ export default function Navigation() {
                 />
                 <Stack.Screen
                     name="ProductsByCategory"
-                    component={ProductsByCategoryScreen}
+                    component={ProductsByCategoryScreen as any}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
