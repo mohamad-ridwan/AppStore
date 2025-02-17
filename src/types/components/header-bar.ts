@@ -1,0 +1,1 @@
+export type CenterBarT = 'title' | 'search'

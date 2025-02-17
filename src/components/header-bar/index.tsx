@@ -3,17 +3,25 @@ import { GestureResponderEvent, PixelRatio, StyleSheet, Text, View } from "react
 import { ThemeMode } from "../../config/theme/theme-mode";
 import ButtonIcon from "../button/ButtonIcon";
 import { THEME_COLOR } from "../../config/theme/theme-color";
+import { CenterBarT } from "../../types/components/header-bar";
+import SearchBar from "../search/SearchBar";
 
 type Props = {
     headerName?: string
     fontWeight?: number
-    onBackPress?: (event: GestureResponderEvent)=>void
+    onBackPress?: (event: GestureResponderEvent) => void
+    centerBarType?: CenterBarT,
+    flexCenter?: number
+    flexRight?: number
 }
 
 const HeaderBar = memo(({
     headerName,
     fontWeight = 600,
-    onBackPress
+    onBackPress,
+    centerBarType = 'title',
+    flexCenter = 0,
+    flexRight = 1
 }: Props) => {
     const { backgroundStyle } = ThemeMode()
     return (
@@ -30,13 +38,25 @@ const HeaderBar = memo(({
                     onPress={onBackPress}
                 />
             </View>
-            <View style={styles.titleContainer}>
-                <Text style={[
-                    styles.headerTitle,
-                    { fontWeight: fontWeight as 600 }
-                ]}>{headerName}</Text>
+            <View style={[
+                styles.titleContainer,
+                { flex: flexCenter }
+            ]}>
+                {centerBarType === 'title' ?
+                    <Text style={[
+                        styles.headerTitle,
+                        {
+                            flex: flexCenter,
+                            fontWeight: fontWeight as 600
+                        }
+                    ]}>{headerName}</Text>
+                    :
+                    centerBarType === 'search' ?
+                        <SearchBar />
+                        : null
+                }
             </View>
-            <View style={{ flex: 1 }}></View>
+            <View style={{ flex: flexRight }}></View>
         </View>
     )
 })
@@ -51,7 +71,6 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     titleContainer: {
-        flex: 0
     },
     headerTitle: {
         fontSize: 15 * PixelRatio.getFontScale(),

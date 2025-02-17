@@ -150,6 +150,28 @@ export default function UseCategories() {
         return null
     }, [categoriesByScreenData])
 
+    const renderItemProductsByCategories = useCallback(({ item }: { item: HomeDataT }) => {
+        if (item.sectionType === 'HEADER') {
+            return (
+                <HeaderBar
+                    headerName="Categories"
+                    onBackPress={(event) => handleBackPress('Categories')}
+                    centerBarType="search"
+                    flexCenter={8}
+                    flexRight={0}
+                />
+            )
+        } else if (item.sectionType === 'CATEGORIES') {
+            return (
+                <ListCategories
+                    productsCategoriesState={categoriesByScreenData}
+                    handleNavigate={handleNavigate}
+                />
+            )
+        }
+        return null
+    }, [categoriesByScreenData])
+
     return {
         renderItem,
         productsCategoriesState,
@@ -159,6 +181,7 @@ export default function UseCategories() {
         renderItemCategoriesScreen,
         categoriesScreenDataElement,
         handleNavigate,
-        productsByCSDataElement
+        productsByCSDataElement,
+        renderItemProductsByCategories
     }
 }
