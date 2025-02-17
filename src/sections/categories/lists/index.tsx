@@ -1,9 +1,8 @@
-import { memo } from "react";
+import { Fragment, memo } from "react";
 import { ProductsCategoriesT } from "../../../types/store/products/productsSlice";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { ThemeMode } from "../../../config/theme/theme-mode";
-import ButtonIcon from "../../../components/button/ButtonIcon";
-import { THEME_COLOR } from "../../../config/theme/theme-color";
+import CategoryCard from "../../../components/card/CategoryCard";
 
 type Props = {
     productsCategoriesState: ProductsCategoriesT[]
@@ -22,25 +21,13 @@ const ListCategories = memo(({
         ]}>
             {productsCategoriesState.map((item, key) => {
                 return (
-                    <View key={key} style={styles.category}>
-                        <ButtonIcon
-                            nameIcon=""
-                            btnHeight={60}
-                            btnWidth={60}
-                            btnRadius={60 / 2}
-                            renderImage="image"
-                            imgUrl={item.img}
-                            sizeIcon={40}
-                            imgRadius={40 / 2}
-                            btnBorderColor={THEME_COLOR.PRIMARY_COLOR.gray}
-                            btnBorderWidth={1}
+                    <Fragment key={key}>
+                        <CategoryCard
+                            image={item?.img}
+                            name={item.name}
                             onPress={() => handleNavigate('ProductsByCategory', { slug: item.slug })}
                         />
-                        <Text
-                            style={styles.name}
-                            numberOfLines={1}
-                        >{item.name}</Text>
-                    </View>
+                    </Fragment>
                 )
             })}
         </View>
@@ -57,13 +44,4 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 10
     },
-    category: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: 5
-    },
-    name: {
-        maxWidth: 60,
-        fontSize: 11
-    }
 })
