@@ -8,15 +8,15 @@ import ProductList from "../../../components/product-list";
 const Categories = memo(() => {
     const {
         renderItem,
-        productsCategoriesState,
-        productsState
+        productsState,
+        categoriesByScreenData
     } = UseCategories()
 
     return (
         <View style={styles.container}>
             <Header />
             <ListPickCategories
-                productsCategories={productsCategoriesState}
+                productsCategories={categoriesByScreenData}
                 renderItem={renderItem}
             />
             <ProductList products={productsState} />

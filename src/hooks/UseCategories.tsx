@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { useIsFocused, useNavigation } from "@react-navigation/native"
-import PickCategoryItem from "../sections/home/categories/list-pick-categories/PickCategoryItem"
 import { Category, ProductsCategoriesT } from "../types/store/products/productsSlice"
 import { shallowEqual, useDispatch, useSelector } from "react-redux"
 import { addProduct, addProductsCategories } from "../store/products/productsSlice"
@@ -10,6 +9,8 @@ import { products, productsByCategory, productsCategories } from "../store/produ
 import { HomeDataT } from "../types/sections/home"
 import HeaderBar from "../components/header-bar"
 import ListCategories from "../sections/categories/lists"
+import CategoryCard from "../components/card/CategoryCard"
+import ListPickCategories from "../sections/home/categories/list-pick-categories"
 
 const categoriesScreenDataElement: HomeDataT[] = [
     {
@@ -118,13 +119,19 @@ export default function UseCategories() {
     }, [])
 
     const renderItem = useCallback(({ item }: { item: ProductsCategoriesT }) => {
-        return <PickCategoryItem
-            name={item.name}
-            slug={item.slug}
-            isActive={activeCategory === item.slug}
-            handlePickCategory={handlePickCategory}
-        />
-    }, [activeCategory])
+        // return <PickCategoryItem
+        //     name={item.name}
+        //     slug={item.slug}
+        //     isActive={activeCategory === item.slug}
+        //     handlePickCategory={handlePickCategory}
+        // />
+        return (
+            <CategoryCard
+                image={item.img}
+                name={item.name}
+            />
+        )
+    }, [categoriesByScreenData])
 
     const handleBackPress = useCallback((screenName: string) => {
         navigation.navigate(screenName as never)
@@ -163,9 +170,9 @@ export default function UseCategories() {
             )
         } else if (item.sectionType === 'CATEGORIES') {
             return (
-                <ListCategories
-                    productsCategoriesState={categoriesByScreenData}
-                    handleNavigate={handleNavigate}
+                <ListPickCategories
+                    productsCategories={categoriesByScreenData}
+                    renderItem={renderItem}
                 />
             )
         }
@@ -182,6 +189,7 @@ export default function UseCategories() {
         categoriesScreenDataElement,
         handleNavigate,
         productsByCSDataElement,
-        renderItemProductsByCategories
+        renderItemProductsByCategories,
+        categoriesByScreenData
     }
 }
