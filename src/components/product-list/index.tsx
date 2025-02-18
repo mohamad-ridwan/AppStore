@@ -6,13 +6,18 @@ import { THEME_COLOR } from "../../config/theme/theme-color";
 
 type Props = {
     products: ProductsData
+    containerMarginTop?: number
 }
 
 const ProductList = memo(({
-    products
+    products,
+    containerMarginTop
 }: Props) => {
     return (
-        <View style={styles.container}>
+        <View style={[
+            styles.container,
+            { marginTop: containerMarginTop }
+        ]}>
             {products?.products && products.products.map((product, key) => {
                 return (
                     <Fragment key={key}>

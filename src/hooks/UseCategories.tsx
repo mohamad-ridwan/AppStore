@@ -11,6 +11,7 @@ import HeaderBar from "../components/header-bar"
 import ListCategories from "../sections/categories/lists"
 import CategoryCard from "../components/card/CategoryCard"
 import ListPickCategories from "../components/list-pick-categories"
+import ProductList from "../components/product-list"
 
 const categoriesScreenDataElement: HomeDataT[] = [
     {
@@ -31,6 +32,10 @@ const productsByCSDataElement: HomeDataT[] = [
     {
         id: '2',
         sectionType: 'CATEGORIES'
+    },
+    {
+        id: '3',
+        sectionType: 'LIST-PRODUCTS'
     },
 ]
 
@@ -169,9 +174,13 @@ export default function UseCategories() {
                     renderItem={renderItem}
                 />
             )
+        } else if (item.sectionType === 'LIST-PRODUCTS') {
+            return (
+                <ProductList products={productsState} containerMarginTop={10}/>
+            )
         }
         return null
-    }, [categoriesByScreenData])
+    }, [categoriesByScreenData, productsState])
 
     return {
         renderItem,
