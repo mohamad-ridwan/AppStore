@@ -7,12 +7,14 @@ type Props = {
     image?: string
     onPress?: (event: GestureResponderEvent) => void
     name?: string
+    isActive?: boolean
 }
 
 const CategoryCard = memo(({
     image,
     onPress,
-    name
+    name,
+    isActive
 }: Props) => {
     return (
         <View style={styles.category}>
@@ -25,12 +27,15 @@ const CategoryCard = memo(({
                 imgUrl={image}
                 sizeIcon={40}
                 imgRadius={40 / 2}
-                btnBorderColor={THEME_COLOR.PRIMARY_COLOR.gray}
+                btnBorderColor={isActive ? THEME_COLOR.PRIMARY_COLOR.green : THEME_COLOR.PRIMARY_COLOR.gray}
                 btnBorderWidth={1}
                 onPress={onPress}
             />
             <Text
-                style={styles.name}
+                style={[
+                    styles.name,
+                    { color: isActive ? THEME_COLOR.PRIMARY_COLOR.green : THEME_COLOR.SECONDARY_COLOR.darkGray }
+                ]}
                 numberOfLines={1}
             >{name}</Text>
         </View>

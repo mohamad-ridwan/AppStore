@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { useIsFocused, useNavigation } from "@react-navigation/native"
-import { Category, ProductsCategoriesT } from "../types/store/products/productsSlice"
+import { Category, ProductsCategoriesT, ProductsData } from "../types/store/products/productsSlice"
 import { shallowEqual, useDispatch, useSelector } from "react-redux"
-import { addProduct, addProductsCategories } from "../store/products/productsSlice"
+import { addProductsCategories } from "../store/products/productsSlice"
 import { createSelector } from "reselect"
 import { RootState } from "../store"
 import { products, productsByCategory, productsCategories } from "../store/products/productAction"
@@ -43,6 +43,7 @@ export default function UseCategories() {
     const [activeCategory, setActiveCategory] = useState<Category>(Category.All)
     const [loadingCategories, setLoadingProducts] = useState<boolean>(true)
     const [loadingProductsByCategory, setLoadingProductsByCategory] = useState<boolean>(true)
+    const [productsCategory, setProductsCategory] = useState<ProductsData>()
 
     const productsCategoriesSlice: any = createSelector(
         [(state: RootState) => state.productsSlice],
@@ -50,14 +51,7 @@ export default function UseCategories() {
             return productSlice.productsCategories
         }
     )
-    const productSlice: any = createSelector(
-        [(state: RootState) => state.productsSlice],
-        productSlice => {
-            return productSlice.product
-        }
-    )
     const productsCategoriesState = useSelector(productsCategoriesSlice, shallowEqual) as ProductsCategoriesT[]
-    const productsState = useSelector(productSlice, shallowEqual)
 
     const dispatch = useDispatch() as any
     const isFocused = useIsFocused()
@@ -109,7 +103,7 @@ export default function UseCategories() {
             productsData.type === 'products/fulfilled' ||
             productsData.type === 'products-by-categories/fulfilled'
         ) {
-            dispatch(addProduct(productsData.payload))
+            setProductsCategory(productsData.payload)
         }
         setLoadingProductsByCategory(false)
     }, [activeCategory, isFocused])
@@ -128,9 +122,11 @@ export default function UseCategories() {
             <CategoryCard
                 image={item.img}
                 name={item.name}
+                isActive={activeCategory === item.slug}
+                onPress={() => handlePickCategory(item.slug)}
             />
         )
-    }, [categoriesByScreenData])
+    }, [activeCategory])
 
     const handleBackPress = useCallback((screenName: string) => {
         navigation.navigate(screenName as never)
@@ -176,23 +172,27 @@ export default function UseCategories() {
             )
         } else if (item.sectionType === 'LIST-PRODUCTS') {
             return (
-                <ProductList products={productsState} containerMarginTop={10}/>
+                <ProductList
+                    products={productsCategory as ProductsData}
+                    containerMarginTop={10}
+                />
             )
         }
         return null
-    }, [categoriesByScreenData, productsState])
+    }, [categoriesByScreenData, productsCategory])
 
     return {
         renderItem,
         productsCategoriesState,
         loadingCategories,
-        productsState,
         loadingProductsByCategory,
         renderItemCategoriesScreen,
         categoriesScreenDataElement,
         handleNavigate,
         productsByCSDataElement,
         renderItemProductsByCategories,
-        categoriesByScreenData
+        categoriesByScreenData,
+        isFocused,
+        productsCategory
     }
 }

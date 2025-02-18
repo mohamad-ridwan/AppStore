@@ -4,12 +4,13 @@ import Header from "./Header";
 import UseCategories from "../../../hooks/UseCategories";
 import ProductList from "../../../components/product-list";
 import ListPickCategories from "../../../components/list-pick-categories";
+import { ProductsData } from "../../../types/store/products/productsSlice";
 
 const Categories = memo(() => {
     const {
         renderItem,
-        productsState,
-        categoriesByScreenData
+        categoriesByScreenData,
+        productsCategory
     } = UseCategories()
 
     return (
@@ -19,7 +20,7 @@ const Categories = memo(() => {
                 productsCategories={categoriesByScreenData}
                 renderItem={renderItem}
             />
-            <ProductList products={productsState} />
+            <ProductList products={productsCategory as ProductsData} />
         </View>
     )
 })
