@@ -10,7 +10,7 @@ import { HomeDataT } from "../types/sections/home"
 import HeaderBar from "../components/header-bar"
 import ListCategories from "../sections/categories/lists"
 import CategoryCard from "../components/card/CategoryCard"
-import ListPickCategories from "../sections/home/categories/list-pick-categories"
+import ListPickCategories from "../components/list-pick-categories"
 
 const categoriesScreenDataElement: HomeDataT[] = [
     {
@@ -119,12 +119,6 @@ export default function UseCategories() {
     }, [])
 
     const renderItem = useCallback(({ item }: { item: ProductsCategoriesT }) => {
-        // return <PickCategoryItem
-        //     name={item.name}
-        //     slug={item.slug}
-        //     isActive={activeCategory === item.slug}
-        //     handlePickCategory={handlePickCategory}
-        // />
         return (
             <CategoryCard
                 image={item.img}

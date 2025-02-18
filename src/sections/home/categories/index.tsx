@@ -2,8 +2,8 @@ import { memo } from "react";
 import { StyleSheet, View } from "react-native";
 import Header from "./Header";
 import UseCategories from "../../../hooks/UseCategories";
-import ListPickCategories from "./list-pick-categories";
 import ProductList from "../../../components/product-list";
+import ListPickCategories from "../../../components/list-pick-categories";
 
 const Categories = memo(() => {
     const {

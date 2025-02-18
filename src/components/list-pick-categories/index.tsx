@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { FlatList, ListRenderItem, StyleSheet } from "react-native";
 import { View } from "react-native";
-import { ProductsCategoriesT } from "../../../../types/store/products/productsSlice";
+import { ProductsCategoriesT } from "../../types/store/products/productsSlice";
 
 type Props = {
     productsCategories: ProductsCategoriesT[]
