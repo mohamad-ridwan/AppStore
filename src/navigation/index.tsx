@@ -10,6 +10,7 @@ import ProfileScreen from '../screens/profile-screen';
 import FavoriteScreen from '../screens/favorite-screen';
 import CategoriesScreen from '../screens/categories-screen';
 import ProductsByCategoryScreen from '../screens/products-by-category-screen';
+import ProductDetailScreen from '../screens/product-detail-screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +46,11 @@ export default function Navigation() {
                 <Stack.Screen
                     name="ProductsByCategory"
                     component={ProductsByCategoryScreen as any}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="ProductDetail"
+                    component={ProductDetailScreen as any}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
