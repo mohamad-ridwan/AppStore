@@ -21,7 +21,9 @@ export default function TabBar({
     const { backgroundStyle } = ThemeMode()
 
     // HANDLE HIDE NAVIGATOR
-    if (state.index === 6) {
+    if (state.routeNames.find((item: any, index: number) =>
+        (item === 'Login' && state.index === index)
+    )) {
         return <></>
     }
 
