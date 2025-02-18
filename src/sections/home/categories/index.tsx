@@ -10,7 +10,8 @@ const Categories = memo(() => {
     const {
         renderItem,
         categoriesByScreenData,
-        productsCategory
+        productsCategory,
+        handleNavigate
     } = UseCategories()
 
     return (
@@ -20,7 +21,10 @@ const Categories = memo(() => {
                 productsCategories={categoriesByScreenData}
                 renderItem={renderItem}
             />
-            <ProductList products={productsCategory as ProductsData} />
+            <ProductList
+                products={productsCategory as ProductsData}
+                onPress={(event, product) => handleNavigate('ProductDetail', product.id)}
+            />
         </View>
     )
 })

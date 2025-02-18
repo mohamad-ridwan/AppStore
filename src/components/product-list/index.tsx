@@ -1,17 +1,19 @@
 import { Fragment, memo } from "react";
-import { PixelRatio, StyleSheet, View } from "react-native";
+import { GestureResponderEvent, PixelRatio, StyleSheet, View } from "react-native";
 import ProductCard from "../card/ProductCard";
-import { ProductsData } from "../../types/store/products/productsSlice";
+import { Product, ProductsData } from "../../types/store/products/productsSlice";
 import { THEME_COLOR } from "../../config/theme/theme-color";
 
 type Props = {
     products: ProductsData
     containerMarginTop?: number
+    onPress?: (event: GestureResponderEvent, product: Product) => void
 }
 
 const ProductList = memo(({
     products,
-    containerMarginTop
+    containerMarginTop,
+    onPress
 }: Props) => {
     return (
         <View style={[
@@ -31,6 +33,9 @@ const ProductList = memo(({
                             imgUrl={product.thumbnail}
                             imgBgColor={THEME_COLOR.PRIMARY_COLOR.gray}
                             heightImg={PixelRatio.roundToNearestPixel(150)}
+                            onPress={(event) => {
+                                if (onPress) onPress(event, product)
+                            }}
                             widthImg="100%"
                             nameFontSize={12}
                             priceFontSize={13}

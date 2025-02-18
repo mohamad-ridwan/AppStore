@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { GestureResponderEvent, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import FastImage from 'react-native-fast-image'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { THEME_COLOR } from "../../config/theme/theme-color";
@@ -25,6 +25,7 @@ type Props = {
     imgBgColor?: string
     priceColor?: string
     rateColor?: string
+    onPress?: (event: GestureResponderEvent)=>void
 }
 
 export default function ProductCard({
@@ -48,15 +49,24 @@ export default function ProductCard({
     imgUrl,
     imgBgColor,
     rateColor = THEME_COLOR.SECONDARY_COLOR.darkGray,
-    priceColor = THEME_COLOR.SECONDARY_COLOR.darkGray
+    priceColor = THEME_COLOR.SECONDARY_COLOR.darkGray,
+    onPress
 }: Props) {
     return (
-        <View style={[
-            styles.container,
-            {
-                gap: gapContainer
-            }
-        ]}>
+        <TouchableOpacity
+            style={[
+                styles.container,
+                {
+                    gap: gapContainer
+                }
+            ]}
+            onPress={(event) => {
+                if (onPress) {
+                    onPress(event)
+                }
+            }}
+            activeOpacity={1}
+        >
             <FastImage
                 style={[
                     styles.img,
@@ -110,7 +120,7 @@ export default function ProductCard({
                     }
                 ]}>{price}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
