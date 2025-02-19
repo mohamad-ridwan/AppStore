@@ -97,7 +97,7 @@ export default function useCategories({ slug, isFirstLoadAction }: Props) {
 
     const handleGetProductsByCategory = useCallback(async () => {
         setLoadingProductsByCategory(true)
-        const productsData = slug ?
+        const productsData = (slug && isFirstLoad) ?
             await dispatch(productsByCategory(slug as Category)) :
             activeCategory === Category.All ?
                 await dispatch(products())
