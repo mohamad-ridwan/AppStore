@@ -2,6 +2,7 @@ type HomeSectionT =
     'HEADER' |
     'SEARCH' |
     'TOP-BANNER' |
+    'SWIPER' |
     'CATEGORIES' |
     'LIST-PRODUCTS'
 
