@@ -9,7 +9,7 @@ export default function ProductsByCategoryScreen({
     const {
         productsByCSDataElement,
         renderItemProductsByCategories,
-    } = useCategories()
+    } = useCategories({ slug: (route.params as any)?.slug })
     return (
         <Container>
             <Content

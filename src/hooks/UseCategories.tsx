@@ -39,11 +39,17 @@ const productsByCSDataElement: HomeDataT[] = [
     },
 ]
 
-export default function useCategories() {
-    const [activeCategory, setActiveCategory] = useState<Category>(Category.All)
+type Props = {
+    slug?: string
+    isFirstLoadAction?: boolean
+}
+
+export default function useCategories({ slug, isFirstLoadAction }: Props) {
+    const [activeCategory, setActiveCategory] = useState<Category>(slug ? slug as Category : Category.All)
     const [loadingCategories, setLoadingProducts] = useState<boolean>(true)
     const [loadingProductsByCategory, setLoadingProductsByCategory] = useState<boolean>(true)
     const [productsCategory, setProductsCategory] = useState<ProductsData>()
+    const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true)
 
     const productsCategoriesSlice: any = createSelector(
         [(state: RootState) => state.productsSlice],
@@ -91,13 +97,18 @@ export default function useCategories() {
 
     const handleGetProductsByCategory = useCallback(async () => {
         setLoadingProductsByCategory(true)
-        const productsData = activeCategory === Category.All ?
-            await dispatch(products())
-            :
-            await dispatch(productsByCategory(activeCategory))
-        if (!isFocused) {
-            setLoadingProductsByCategory(false)
-            return
+        const productsData = slug ?
+            await dispatch(productsByCategory(slug as Category)) :
+            activeCategory === Category.All ?
+                await dispatch(products())
+                :
+                await dispatch(productsByCategory(activeCategory))
+
+        if (!isFocused || isFirstLoad) {
+            if (isFirstLoadAction) {
+                setLoadingProductsByCategory(false)
+                return
+            }
         }
         if (
             productsData.type === 'products/fulfilled' ||
@@ -106,17 +117,25 @@ export default function useCategories() {
             setProductsCategory(productsData.payload)
         }
         setLoadingProductsByCategory(false)
-    }, [activeCategory, isFocused])
+    }, [activeCategory, isFocused, slug])
 
     // GET PRODUCTS BY CATEGORY
     useEffect(() => {
         handleGetProductsByCategory()
-    }, [activeCategory])
+    }, [activeCategory, isFirstLoad])
 
     const handlePickCategory = useCallback((type: Category) => {
         setActiveCategory(type)
     }, [])
 
+    useEffect(() => {
+        if (slug) {
+            setIsFirstLoad(false)
+            setActiveCategory(slug as Category)
+        }
+    }, [slug])
+
+    // CATEGORIES IN HOME SCREEN
     const renderItem = useCallback(({ item }: { item: ProductsCategoriesT }) => {
         return (
             <CategoryCard
@@ -136,6 +155,7 @@ export default function useCategories() {
         navigation.navigate(...params as never)
     }, [])
 
+    // CATEGORIES SCREEN
     const renderItemCategoriesScreen = useCallback(({ item }: { item: HomeDataT }) => {
         if (item.sectionType === 'HEADER') {
             return (
@@ -152,6 +172,7 @@ export default function useCategories() {
         return null
     }, [categoriesByScreenData])
 
+    // PRODUCTS BY CATEGORY SCREEN
     const renderItemProductsByCategories = useCallback(({ item }: { item: HomeDataT }) => {
         if (item.sectionType === 'HEADER') {
             return (

@@ -12,7 +12,7 @@ const Categories = memo(() => {
         categoriesByScreenData,
         productsCategory,
         handleNavigate
-    } = useCategories()
+    } = useCategories({})
 
     return (
         <View style={styles.container}>

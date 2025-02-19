@@ -6,7 +6,7 @@ export default function CategoriesScreen() {
     const {
         renderItemCategoriesScreen,
         categoriesScreenDataElement
-    } = useCategories()
+    } = useCategories({})
 
     return (
         <Container>
