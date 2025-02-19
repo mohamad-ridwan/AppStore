@@ -2,10 +2,10 @@ import { memo } from "react";
 import { Dimensions, PixelRatio, StyleSheet, View } from "react-native";
 import FastImage from 'react-native-fast-image'
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
-import { UseHome } from "../../hooks/UseHome";
+import { useHome } from "../../hooks/useHome";
 
 const Banner = memo(() => {
-    const { bannerData } = UseHome()
+    const { bannerData } = useHome()
     return (
         <View style={styles.container}>
             <SwiperFlatList

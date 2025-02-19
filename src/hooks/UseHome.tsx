@@ -36,7 +36,7 @@ const bannerData = [
     'https://images.unsplash.com/photo-1497215842964-222b430dc094?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 ]
 
-export function UseHome() {
+export function useHome() {
     const scrollY = useRef(new Animated.Value(0)).current;
 
     const dispatch = useDispatch() as any

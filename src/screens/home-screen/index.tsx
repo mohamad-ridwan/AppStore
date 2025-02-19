@@ -1,5 +1,5 @@
 import React from 'react'
-import { UseHome } from '../../hooks/UseHome'
+import { useHome } from '../../hooks/useHome'
 import Container from './Container'
 import Content from './Content'
 
@@ -8,7 +8,7 @@ export default function HomeScreen() {
     data,
     renderItem,
     scrollY
-  } = UseHome()
+  } = useHome()
 
   return (
     <Container>
