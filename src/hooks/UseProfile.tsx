@@ -14,7 +14,7 @@ const menuAccountSettings: MenuAccountSettingsT[] = [
     { name: 'Log Out', icon: 'log-out-outline' },
 ]
 
-export default function UseProfile() {
+export default function useProfile() {
     const dispatch = useDispatch() as any
     const navigation = useNavigation()
 

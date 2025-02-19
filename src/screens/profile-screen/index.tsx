@@ -2,7 +2,7 @@ import Profile from "../../sections/profile/profile";
 import { View } from "react-native";
 import Header from "../../sections/profile/Header";
 import AccountSetting from "../../sections/profile/account-settings";
-import UseProfile from "../../hooks/UseProfile";
+import useProfile from "../../hooks/useProfile";
 import Container from "./Container";
 
 export default function ProfileScreen() {
@@ -10,7 +10,7 @@ export default function ProfileScreen() {
         menuAccountSettings,
         userState,
         handleLogOut,
-    } = UseProfile()
+    } = useProfile()
     return (
         <Container>
             <View>
