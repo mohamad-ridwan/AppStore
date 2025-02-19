@@ -1,4 +1,4 @@
-import UseCategories from "../../hooks/UseCategories";
+import useCategories from "../../hooks/useCategories";
 import { HomeTabScreenProps } from "../../types/navigation";
 import Container from "./Container";
 import Content from "./Content";
@@ -9,7 +9,7 @@ export default function ProductsByCategoryScreen({
     const {
         productsByCSDataElement,
         renderItemProductsByCategories,
-    } = UseCategories()
+    } = useCategories()
     return (
         <Container>
             <Content

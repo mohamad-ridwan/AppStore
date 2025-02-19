@@ -39,7 +39,7 @@ const productsByCSDataElement: HomeDataT[] = [
     },
 ]
 
-export default function UseCategories() {
+export default function useCategories() {
     const [activeCategory, setActiveCategory] = useState<Category>(Category.All)
     const [loadingCategories, setLoadingProducts] = useState<boolean>(true)
     const [loadingProductsByCategory, setLoadingProductsByCategory] = useState<boolean>(true)
