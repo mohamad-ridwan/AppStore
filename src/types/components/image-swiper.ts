@@ -5,6 +5,6 @@ export type BaseImageSwiperT = {
     image: string
 };
 
-export type ImageSwiperPropsT<T extends KeyImageSwiperT> = {
+export type ImageSwiperPropsT<T extends BaseImageSwiperT> = {
     data: T
 };

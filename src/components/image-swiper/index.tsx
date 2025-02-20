@@ -1,13 +1,14 @@
 import { memo } from "react";
 import { ListRenderItem, PixelRatio, StyleSheet, View } from "react-native";
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
+import { BaseImageSwiperT, ImageSwiperPropsT } from "../../types/components/image-swiper";
 
-type Props<T> = {
-    data: T[]
-    renderItem?: ListRenderItem<any> | null
+type Props<T extends ImageSwiperPropsT<BaseImageSwiperT>[]> = {
+    data: T
+    renderItem?: ListRenderItem<ImageSwiperPropsT<BaseImageSwiperT>> | null
 }
 
-const ImageSwiper = memo(<T,>({
+const ImageSwiper = memo(<T extends ImageSwiperPropsT<BaseImageSwiperT>[],>({
     data,
     renderItem
 }: Props<T>) => {
