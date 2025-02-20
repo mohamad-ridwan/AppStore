@@ -23,7 +23,7 @@ const Categories = memo(() => {
             />
             <ProductList
                 products={productsCategory as ProductsData}
-                onPress={(event, product) => handleNavigate('ProductDetail', product.id)}
+                onPress={(event, product) => handleNavigate('ProductDetail', {id: product.id})}
             />
         </View>
     )

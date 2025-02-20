@@ -6,7 +6,10 @@ import Content from "./Content";
 export default function ProductDetailScreen({
     navigation, route
 }: HomeTabScreenProps<'ProductDetail'>) {
-    const { dataScreenElement, renderItemScreenData } = useProductDetail({ id: (route.params as any).id })
+    const {
+        dataScreenElement,
+        renderItemScreenData
+    } = useProductDetail({ id: (route.params as any).id })
     return (
         <Container>
             <Content

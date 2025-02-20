@@ -1,6 +1,12 @@
 import { memo } from "react";
 
-const ImgProductSwiper = memo(()=>{
+type Props = {
+    images?: string[]
+}
+
+const ImgProductSwiper = memo(({
+    images = []
+}: Props)=>{
     return (
         <></>
     )

@@ -13,6 +13,7 @@ type Props = {
     centerBarType?: CenterBarT,
     flexCenter?: number
     flexRight?: number
+    bgContainer?: string
 }
 
 const HeaderBar = memo(({
@@ -21,13 +22,14 @@ const HeaderBar = memo(({
     onBackPress,
     centerBarType = 'title',
     flexCenter = 0,
-    flexRight = 1
+    flexRight = 1,
+    bgContainer
 }: Props) => {
     const { backgroundStyle } = ThemeMode()
     return (
         <View style={[
             styles.container,
-            { backgroundColor: backgroundStyle.backgroundColor }
+            { backgroundColor: bgContainer ?? backgroundStyle.backgroundColor }
         ]}>
             <View style={{ flex: 1 }}>
                 <ButtonIcon
