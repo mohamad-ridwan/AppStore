@@ -3,11 +3,12 @@ import { Animated, BackHandler } from "react-native";
 import { HomeDataT } from "../types/sections/home";
 import Header from "../sections/home/header";
 import SearchBar from "../components/search/SearchBar";
-import Banner from "../sections/home/Banner";
 import Categories from "../sections/home/categories";
 import { THEME_COLOR } from "../config/theme/theme-color";
 import { useDispatch } from "react-redux";
 import { getCartByUser } from "../store/cart/cartAction";
+import ImageSwiper from "../components/image-swiper";
+import ItemImageSwiper from "../components/image-swiper/ItemImageSwiper";
 
 const data: HomeDataT[] = [
     {
@@ -82,7 +83,16 @@ export function useHome() {
         } else if (item.sectionType === 'SEARCH') {
             return <SearchBar />
         } else if (item.sectionType === 'TOP-BANNER') {
-            return <Banner />
+            return (
+                <ImageSwiper
+                    data={bannerData}
+                    renderItem={({ item }) => (
+                        <ItemImageSwiper
+                            uri={item}
+                        />
+                    )}
+                />
+            )
         } else if (item.sectionType === 'CATEGORIES') {
             return <Categories />
         }
