@@ -5,17 +5,11 @@ import { useDispatch } from "react-redux";
 import { productById } from "../store/products/productAction";
 import { Product } from "../types/store/products/productsSlice";
 import ImgProductSwiper from "../sections/product-detail/img-product-swiper";
+import { productDetailData } from "../assets/data/product-detail";
 
-const dataScreenElement: HomeDataT[] = [
-    {
-        id: '1',
-        sectionType: 'HEADER'
-    },
-    {
-        id: '2',
-        sectionType: 'SWIPER'
-    }
-]
+const {
+    dataScreenElement
+} = productDetailData
 
 type Props = {
     id: number

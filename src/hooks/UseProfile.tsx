@@ -3,16 +3,14 @@ import { useNavigation } from '@react-navigation/native';
 import { RootState } from "../store"
 import { shallowEqual, useDispatch, useSelector } from "react-redux"
 import { UserState } from "../types/store/auth/authSlice"
-import { MenuAccountSettingsT } from "../types/sections/profile"
 import { resetAccessToken } from "../services/storage-management/auth/resetAccessToken"
 import { resetUser } from "../store/auth/authSlice";
 import { useCallback } from "react";
+import { profileData } from "../assets/data/profile";
 
-const menuAccountSettings: MenuAccountSettingsT[] = [
-    { name: 'Profile Info', icon: 'person-outline' },
-    { name: 'Password & Security', icon: 'key-outline' },
-    { name: 'Log Out', icon: 'log-out-outline' },
-]
+const {
+    menuAccountSettings,
+} = profileData
 
 export default function useProfile() {
     const dispatch = useDispatch() as any
