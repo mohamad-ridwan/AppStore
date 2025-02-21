@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { PixelRatio, StyleSheet, View } from "react-native";
+import { PixelRatio, StyleSheet, Text, View } from "react-native";
 import { ThemeMode } from "../../../config/theme/theme-mode";
 import { THEME_COLOR } from "../../../config/theme/theme-color";
 import { AutoSizeText, ResizeTextMode } from 'react-native-auto-size-text';
@@ -13,6 +13,7 @@ type Props = {
     discountPercentage?: number
     discountPrice?: string
     rating?: number
+    totalReviews?: number
 }
 
 const { formatterCurrency } = formatHelper
@@ -23,7 +24,8 @@ const MainInfo = memo(({
     price,
     discountPercentage,
     discountPrice,
-    rating
+    rating,
+    totalReviews
 }: Props) => {
     const { backgroundStyle } = ThemeMode()
     return (
@@ -93,6 +95,19 @@ const MainInfo = memo(({
                         containerBorderWidth={1}
                         containerBorderColor={THEME_COLOR.PRIMARY_COLOR.gray}
                     />
+                    {/* <LabelCard
+                        label={`${totalReviews  ?? ''}`}
+                        icon="star"
+                        labelFontWeight={900}
+                        containerRadius={20}
+                        labelFontSize={13 * PixelRatio.getFontScale()}
+                        containerBgColor="transparent"
+                        colorIcon={THEME_COLOR.PRIMARY_COLOR.yellowStar}
+                        labelColor={THEME_COLOR.SECONDARY_COLOR.darkGray}
+                        containerBorderWidth={1}
+                        containerBorderColor={THEME_COLOR.PRIMARY_COLOR.gray}
+                    /> */}
+                    <Text style={styles.totalReviews}>{totalReviews} Reviews</Text>
                 </View>
             }
         </View>
@@ -139,7 +154,11 @@ const styles = StyleSheet.create({
     displayRating: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 5,
+        gap: 10,
         flexWrap: 'wrap'
+    },
+    totalReviews: {
+        fontSize: 12,
+        color: THEME_COLOR.SECONDARY_COLOR.gray
     }
 })
