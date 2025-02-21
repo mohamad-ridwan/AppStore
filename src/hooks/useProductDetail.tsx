@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { HomeDataT } from "../types/sections/home";
 import HeaderBar from "../components/header-bar";
 import { useDispatch } from "react-redux";
@@ -8,11 +8,16 @@ import ImgProductSwiper from "../sections/product-detail/img-product-swiper";
 import { productDetailData } from "../assets/data/product-detail";
 import Information from "../sections/product-detail/information";
 import { useNavigation } from "@react-navigation/native";
+import { formatHelper } from "../helpers/format";
 
 const {
     dataScreenElement,
     dataIcons
 } = productDetailData
+
+const {
+    formatterCurrency
+} = formatHelper
 
 type Props = {
     id: number
@@ -26,22 +31,35 @@ const useProductDetail = ({ id }: Props) => {
 
     const navigation = useNavigation()
 
+    const discountPrice = useMemo((): string | undefined => {
+        if (!product?.id) {
+            return
+        }
+        const price = product.price
+        const discountPercentage = product.discountPercentage
+
+        const discountAmount = (price * discountPercentage) / 100
+
+        const discountedPrice = price - discountAmount
+        return `${formatterCurrency('USD').format(discountedPrice)}`
+    }, [product])
+
     const renderItemScreenData = useCallback(({ item }: { item: HomeDataT }) => {
         if (item.sectionType === 'HEADER') {
             return (
                 <HeaderBar
                     headerName="Detail Product"
                     dataIcons={dataIcons}
-                    onBackPress={()=>navigation.goBack()}
+                    onBackPress={() => navigation.goBack()}
                 />
             )
         } else if (item.sectionType === 'SWIPER') {
             return <ImgProductSwiper images={product?.images} />
         } else if (item.sectionType === 'INFORMATION') {
-            return <Information product={product} />
+            return <Information product={product} discountPrice={discountPrice} />
         }
         return null
-    }, [product])
+    }, [product, discountPrice])
 
     const handleGetProductById = useCallback(async () => {
         const product = await dispatch(productById(productId))
@@ -61,7 +79,7 @@ const useProductDetail = ({ id }: Props) => {
     return {
         dataScreenElement,
         renderItemScreenData,
-        product
+        product,
     }
 }
 

@@ -8,7 +8,7 @@ export default function ProductDetailScreen({
 }: HomeTabScreenProps<'ProductDetail'>) {
     const {
         dataScreenElement,
-        renderItemScreenData
+        renderItemScreenData,
     } = useProductDetail({ id: (route.params as any).id })
     return (
         <Container>

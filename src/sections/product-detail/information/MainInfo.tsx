@@ -3,19 +3,24 @@ import { PixelRatio, StyleSheet, Text, View } from "react-native";
 import { ThemeMode } from "../../../config/theme/theme-mode";
 import { THEME_COLOR } from "../../../config/theme/theme-color";
 import { AutoSizeText, ResizeTextMode } from 'react-native-auto-size-text';
+import { formatHelper } from "../../../helpers/format";
 
 type Props = {
     title: string
     brand?: string
     price?: number
     discountPercentage?: number
+    discountPrice?: string
 }
+
+const { formatterCurrency } = formatHelper
 
 const MainInfo = memo(({
     title,
     brand,
     price,
-    discountPercentage
+    discountPercentage,
+    discountPrice
 }: Props) => {
     const { backgroundStyle } = ThemeMode()
     return (
@@ -30,9 +35,9 @@ const MainInfo = memo(({
                         { color: backgroundStyle.color }
                     ]}
                 >
-                    ${price}
+                    {discountPrice ? discountPrice : formatterCurrency('USD').format(price as number)}
                 </AutoSizeText>
-                {discountPercentage &&
+                {discountPrice &&
                     <AutoSizeText
                         fontSize={16}
                         numberOfLines={2}
@@ -41,7 +46,7 @@ const MainInfo = memo(({
                             styles.discountPrice,
                         ]}
                     >
-                        ${discountPercentage}
+                        {formatterCurrency('USD').format(price as number)}
                     </AutoSizeText>
                 }
             </View>
@@ -81,7 +86,7 @@ const styles = StyleSheet.create({
     normalPrice: {
         fontWeight: 700,
     },
-    discountPrice:{
+    discountPrice: {
         textDecorationLine: 'line-through',
         textDecorationStyle: 'solid',
         color: THEME_COLOR.SECONDARY_COLOR.gray

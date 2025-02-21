@@ -5,9 +5,10 @@ import MainInfo from "./MainInfo";
 
 type Props = {
     product: Product
+    discountPrice?: string
 }
 
-const Information = memo(({ product }: Props) => {
+const Information = memo(({ product, discountPrice }: Props) => {
     return (
         <View style={styles.container}>
             <MainInfo
@@ -15,6 +16,7 @@ const Information = memo(({ product }: Props) => {
                 brand={product.brand}
                 price={product.price}
                 discountPercentage={product.discountPercentage}
+                discountPrice={discountPrice}
             />
         </View>
     )

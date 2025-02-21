@@ -11,7 +11,7 @@ type Props = {
 
 const Content = memo(({
     dataScreenElement,
-    renderItemScreenElement
+    renderItemScreenElement,
 }: Props) => {
     return (
         <FlatList
