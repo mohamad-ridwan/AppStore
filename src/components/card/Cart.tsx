@@ -1,14 +1,23 @@
 import { memo, useMemo } from "react";
 import { PixelRatio, StyleSheet, Text, View } from "react-native";
-import ButtonIcon from "../../../components/button/ButtonIcon";
-import { THEME_COLOR } from "../../../config/theme/theme-color";
+import ButtonIcon from "../button/ButtonIcon";
+import { THEME_COLOR } from "../../config/theme/theme-color";
 import { createSelector } from "reselect";
-import { RootState } from "../../../store";
+import { RootState } from "../../store";
 import { shallowEqual, useSelector } from "react-redux";
-import { Cart, MainCartData } from "../../../types/store/cart/cartSlice";
-import { ThemeMode } from "../../../config/theme/theme-mode";
+import { Cart, MainCartData } from "../../types/store/cart/cartSlice";
+import { ThemeMode } from "../../config/theme/theme-mode";
+import { PressableT } from "../../types/components/buttons";
 
-const CartHeader = memo(() => {
+type Props = {
+    pressableBgColor?: string
+    pressableType?: PressableT
+}
+
+const CartHeader = memo(({
+    pressableBgColor,
+    pressableType
+}: Props) => {
     const { backgroundStyle } = ThemeMode()
     const cartlice: any = createSelector(
         [(state: RootState) => state.cartSlice],
@@ -49,6 +58,8 @@ const CartHeader = memo(() => {
                 btnWidth={33}
                 sizeIcon={16}
                 elevationContainer={0}
+                pressableType={pressableType}
+                pressableBgColor={pressableBgColor}
                 colorIcon={THEME_COLOR.SECONDARY_COLOR.darkGray}
             />
         </View>

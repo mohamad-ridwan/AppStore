@@ -2,7 +2,7 @@ import { Animated, StyleSheet, Text } from "react-native";
 import { memo } from "react";
 import { THEME_COLOR } from "../../../config/theme/theme-color";
 import { ThemeMode } from "../../../config/theme/theme-mode";
-import CartHeader from "./Cart";
+import CartHeader from "../../../components/card/Cart";
 
 type Props = {
     backgroundColor: Animated.AnimatedInterpolation<string | number>

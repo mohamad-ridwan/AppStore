@@ -7,6 +7,7 @@ const PRIMARY_COLOR = {
 
 const SECONDARY_COLOR = {
     gray: '#666',
+    blurGray: '#B3B3B3',
     darkGray: '#2A2A2A'
 }
 

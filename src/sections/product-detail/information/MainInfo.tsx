@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     discountPrice: {
         textDecorationLine: 'line-through',
         textDecorationStyle: 'solid',
-        color: THEME_COLOR.SECONDARY_COLOR.gray
+        color: THEME_COLOR.SECONDARY_COLOR.blurGray
     },
     displayName: {
         flexDirection: 'row',

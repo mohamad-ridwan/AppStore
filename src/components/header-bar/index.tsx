@@ -5,6 +5,7 @@ import ButtonIcon from "../button/ButtonIcon";
 import { THEME_COLOR } from "../../config/theme/theme-color";
 import { CenterBarT } from "../../types/components/header-bar";
 import SearchBar from "../search/SearchBar";
+import CartHeader from "../card/Cart";
 
 type Props = {
     headerName?: string
@@ -71,10 +72,14 @@ const HeaderBar = memo(({
                         key={index}
                         nameIcon={icon}
                         pressableType="platform-pressable"
-                        pressableBgColor={THEME_COLOR.PRIMARY_COLOR.gray}
                         colorIcon={THEME_COLOR.SECONDARY_COLOR.darkGray}
+                        btnBorderWidth={1}
+                        btnBorderColor={THEME_COLOR.PRIMARY_COLOR.gray}
                     />
                 ))}
+                <CartHeader 
+                    pressableType="platform-pressable" 
+                />
             </View>
         </View>
     )

@@ -17,7 +17,6 @@ const dataScreenElement: HomeDataT[] = [
 
 const dataIcons: string[] = [
     'heart-outline',
-    'bag-handle-outline',
 ]
 
 export const productDetailData = {
