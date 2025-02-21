@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         gap: 10
     },
     productName: {
-        fontWeight: 'normal',
+        fontWeight: 'light',
         textAlign: 'left',
         flex: 1
     },

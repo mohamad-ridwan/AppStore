@@ -95,11 +95,10 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     titleContainer: {
-        alignItems: 'baseline',
-        justifyContent: 'flex-start'
     },
     headerTitle: {
         fontSize: 15 * PixelRatio.getFontScale(),
+        marginTop: 5
     },
     rightContent: {
         flexDirection: 'row',
