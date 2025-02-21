@@ -13,6 +13,8 @@ const Information = memo(({ product }: Props) => {
             <MainInfo
                 title={product.title}
                 brand={product.brand}
+                price={product.price}
+                discountPercentage={product.discountPercentage}
             />
         </View>
     )

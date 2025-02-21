@@ -18,6 +18,7 @@
     "@reduxjs/toolkit": "^2.5.1",
     "react": "18.3.1",
     "react-native": "0.77.0",
+    "react-native-auto-size-text": "^1.1.1",
     "react-native-bootsplash": "^6.3.3",
     "react-native-bouncy-checkbox": "^4.1.2",
     "react-native-fast-image": "^8.6.3",
