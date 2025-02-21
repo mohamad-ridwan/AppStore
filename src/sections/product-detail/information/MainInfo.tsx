@@ -1,9 +1,10 @@
 import { memo } from "react";
-import { PixelRatio, StyleSheet, Text, View } from "react-native";
+import { PixelRatio, StyleSheet, View } from "react-native";
 import { ThemeMode } from "../../../config/theme/theme-mode";
 import { THEME_COLOR } from "../../../config/theme/theme-color";
 import { AutoSizeText, ResizeTextMode } from 'react-native-auto-size-text';
 import { formatHelper } from "../../../helpers/format";
+import LabelCard from "../../../components/card/LabelCard";
 
 type Props = {
     title: string
@@ -11,6 +12,7 @@ type Props = {
     price?: number
     discountPercentage?: number
     discountPrice?: string
+    rating?: number
 }
 
 const { formatterCurrency } = formatHelper
@@ -20,36 +22,49 @@ const MainInfo = memo(({
     brand,
     price,
     discountPercentage,
-    discountPrice
+    discountPrice,
+    rating
 }: Props) => {
     const { backgroundStyle } = ThemeMode()
     return (
         <View style={styles.container}>
-            <View style={styles.displayPrice}>
-                <AutoSizeText
-                    fontSize={20}
-                    numberOfLines={2}
-                    mode={ResizeTextMode.max_lines}
-                    style={[
-                        styles.normalPrice,
-                        { color: backgroundStyle.color }
-                    ]}
-                >
-                    {discountPrice ? discountPrice : formatterCurrency('USD').format(price as number)}
-                </AutoSizeText>
-                {discountPrice &&
+            <View style={styles.containerPrice}>
+                <View style={styles.displayPrice}>
                     <AutoSizeText
-                        fontSize={16}
+                        fontSize={20}
                         numberOfLines={2}
                         mode={ResizeTextMode.max_lines}
                         style={[
-                            styles.discountPrice,
+                            styles.normalPrice,
+                            { color: backgroundStyle.color }
                         ]}
                     >
-                        {formatterCurrency('USD').format(price as number)}
+                        {discountPrice ? discountPrice : formatterCurrency('USD').format(price as number)}
                     </AutoSizeText>
+                    {discountPrice &&
+                        <AutoSizeText
+                            fontSize={16}
+                            numberOfLines={2}
+                            mode={ResizeTextMode.max_lines}
+                            style={[
+                                styles.discountPrice,
+                            ]}
+                        >
+                            {formatterCurrency('USD').format(price as number)}
+                        </AutoSizeText>
+                    }
+                </View>
+                {brand &&
+                    <LabelCard
+                        label={brand}
+                        icon="pricetag-outline"
+                        containerRadius={13}
+                        labelFontSize={13 * PixelRatio.getFontScale()}
+                        containerBgColor={THEME_COLOR.SECONDARY_COLOR.darkGray}
+                    />
                 }
             </View>
+
             <View style={styles.displayName}>
                 <AutoSizeText
                     fontSize={16}
@@ -62,11 +77,24 @@ const MainInfo = memo(({
                 >
                     {title}
                 </AutoSizeText>
-                {brand && <Text style={[
-                    styles.brand,
-                    { color: THEME_COLOR.PRIMARY_COLOR.gray }
-                ]}>{brand}</Text>}
             </View>
+
+            {rating &&
+                <View style={styles.displayRating}>
+                    <LabelCard
+                        label={`${rating.toFixed(1)}`}
+                        icon="star"
+                        labelFontWeight={900}
+                        containerRadius={20}
+                        labelFontSize={13 * PixelRatio.getFontScale()}
+                        containerBgColor="transparent"
+                        colorIcon={THEME_COLOR.PRIMARY_COLOR.yellowStar}
+                        labelColor={THEME_COLOR.SECONDARY_COLOR.darkGray}
+                        containerBorderWidth={1}
+                        containerBorderColor={THEME_COLOR.PRIMARY_COLOR.gray}
+                    />
+                </View>
+            }
         </View>
     )
 })
@@ -77,11 +105,18 @@ const styles = StyleSheet.create({
     container: {
         gap: 10
     },
+    containerPrice: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        gap: 10,
+        flexWrap: 'wrap'
+    },
     displayPrice: {
         flexDirection: 'row',
         alignItems: 'center',
         flexWrap: 'wrap',
-        gap: 5
+        gap: 5,
+        flex: 1
     },
     normalPrice: {
         fontWeight: 700,
@@ -101,12 +136,10 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         flex: 1
     },
-    brand: {
-        fontSize: 13 * PixelRatio.getFontScale(),
-        fontWeight: 500,
-        backgroundColor: THEME_COLOR.SECONDARY_COLOR.darkGray,
-        borderRadius: 13,
-        paddingVertical: 6,
-        paddingHorizontal: 12,
+    displayRating: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 5,
+        flexWrap: 'wrap'
     }
 })
