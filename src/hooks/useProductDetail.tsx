@@ -6,9 +6,12 @@ import { productById } from "../store/products/productAction";
 import { Product } from "../types/store/products/productsSlice";
 import ImgProductSwiper from "../sections/product-detail/img-product-swiper";
 import { productDetailData } from "../assets/data/product-detail";
+import Information from "../sections/product-detail/information";
+import { useNavigation } from "@react-navigation/native";
 
 const {
-    dataScreenElement
+    dataScreenElement,
+    dataIcons
 } = productDetailData
 
 type Props = {
@@ -21,13 +24,21 @@ const useProductDetail = ({ id }: Props) => {
 
     const dispatch = useDispatch() as any
 
+    const navigation = useNavigation()
+
     const renderItemScreenData = useCallback(({ item }: { item: HomeDataT }) => {
         if (item.sectionType === 'HEADER') {
             return (
-                <HeaderBar />
+                <HeaderBar
+                    headerName="Detail Product"
+                    dataIcons={dataIcons}
+                    onBackPress={()=>navigation.goBack()}
+                />
             )
         } else if (item.sectionType === 'SWIPER') {
             return <ImgProductSwiper images={product?.images} />
+        } else if (item.sectionType === 'INFORMATION') {
+            return <Information product={product} />
         }
         return null
     }, [product])

@@ -11,9 +11,11 @@ type Props = {
     fontWeight?: number
     onBackPress?: (event: GestureResponderEvent) => void
     centerBarType?: CenterBarT,
+    flexLeft?: number
     flexCenter?: number
     flexRight?: number
     bgContainer?: string
+    dataIcons?: string[]
 }
 
 const HeaderBar = memo(({
@@ -21,9 +23,11 @@ const HeaderBar = memo(({
     fontWeight = 600,
     onBackPress,
     centerBarType = 'title',
-    flexCenter = 0,
+    flexLeft = 1,
+    flexCenter = 1,
     flexRight = 1,
-    bgContainer
+    bgContainer,
+    dataIcons
 }: Props) => {
     const { backgroundStyle } = ThemeMode()
     return (
@@ -31,7 +35,7 @@ const HeaderBar = memo(({
             styles.container,
             { backgroundColor: bgContainer ?? backgroundStyle.backgroundColor }
         ]}>
-            <View style={{ flex: 1 }}>
+            <View style={{ flex: flexLeft }}>
                 <ButtonIcon
                     nameIcon="arrow-back-outline"
                     pressableType="platform-pressable"
@@ -58,7 +62,20 @@ const HeaderBar = memo(({
                         : null
                 }
             </View>
-            <View style={{ flex: flexRight }}></View>
+            <View style={[
+                styles.rightContent,
+                { flex: flexRight }
+            ]}>
+                {dataIcons?.map((icon, index) => (
+                    <ButtonIcon
+                        key={index}
+                        nameIcon={icon}
+                        pressableType="platform-pressable"
+                        pressableBgColor={THEME_COLOR.PRIMARY_COLOR.gray}
+                        colorIcon={THEME_COLOR.SECONDARY_COLOR.darkGray}
+                    />
+                ))}
+            </View>
         </View>
     )
 })
@@ -73,8 +90,16 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     titleContainer: {
+        alignItems: 'baseline',
+        justifyContent: 'flex-start'
     },
     headerTitle: {
         fontSize: 15 * PixelRatio.getFontScale(),
+    },
+    rightContent: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
+        justifyContent: 'flex-end'
     }
 })

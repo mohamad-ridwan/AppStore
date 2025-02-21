@@ -4,7 +4,8 @@ type HomeSectionT =
     'TOP-BANNER' |
     'SWIPER' |
     'CATEGORIES' |
-    'LIST-PRODUCTS'
+    'LIST-PRODUCTS' |
+    'INFORMATION'
 
 export type HomeDataT = {
     id: string

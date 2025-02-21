@@ -6,18 +6,34 @@ import { BaseImageSwiperT, ImageSwiperPropsT } from "../../types/components/imag
 type Props<T extends ImageSwiperPropsT<BaseImageSwiperT>[]> = {
     data: T
     renderItem?: ListRenderItem<ImageSwiperPropsT<BaseImageSwiperT>> | null
+    height?: number
+    paddingTop?: number
+    autoPlay?: boolean
+    autoPlayDelay?: number
+    autoPlayLoop?: boolean
 }
 
 const ImageSwiper = memo(<T extends ImageSwiperPropsT<BaseImageSwiperT>[],>({
     data,
-    renderItem
+    renderItem,
+    height = PixelRatio.roundToNearestPixel(130),
+    paddingTop = 10,
+    autoPlay = true,
+    autoPlayDelay = 2,
+    autoPlayLoop = true
 }: Props<T>) => {
     return (
-        <View style={styles.container}>
+        <View style={[
+            styles.container,
+            {
+                height,
+                paddingTop
+            }
+        ]}>
             <SwiperFlatList
-                autoplay
-                autoplayDelay={2}
-                autoplayLoop
+                autoplay={autoPlay}
+                autoplayDelay={autoPlayDelay}
+                autoplayLoop={autoPlayLoop}
                 data={data}
                 renderItem={renderItem}
             />
@@ -30,7 +46,5 @@ export default ImageSwiper
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: PixelRatio.roundToNearestPixel(130),
-        paddingTop: 10,
     },
 })
