@@ -19,6 +19,7 @@ const Information = memo(({ product, discountPrice }: Props) => {
                 discountPrice={discountPrice}
                 rating={product.rating}
                 totalReviews={product.reviews?.length}
+                description={product.description}
             />
         </View>
     )

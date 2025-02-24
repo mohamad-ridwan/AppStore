@@ -16,7 +16,7 @@ const Rating = memo(({ rating, totalReviews }: Props) => {
                     <LabelCard
                         label={`${rating.toFixed(1)}`}
                         icon="star"
-                        labelFontWeight={900}
+                        labelFontWeight={500}
                         containerRadius={20}
                         labelFontSize={13 * PixelRatio.getFontScale()}
                         containerBgColor="transparent"
@@ -25,18 +25,18 @@ const Rating = memo(({ rating, totalReviews }: Props) => {
                         containerBorderWidth={1}
                         containerBorderColor={THEME_COLOR.PRIMARY_COLOR.gray}
                     />
-                    {/* <LabelCard
-                        label={`${totalReviews  ?? ''}`}
-                        icon="star"
-                        labelFontWeight={900}
+                    <LabelCard
+                        label={'94%'}
+                        icon="thumbs-up"
+                        labelFontWeight={500}
                         containerRadius={20}
                         labelFontSize={13 * PixelRatio.getFontScale()}
                         containerBgColor="transparent"
-                        colorIcon={THEME_COLOR.PRIMARY_COLOR.yellowStar}
+                        colorIcon={THEME_COLOR.PRIMARY_COLOR.green}
                         labelColor={THEME_COLOR.SECONDARY_COLOR.darkGray}
                         containerBorderWidth={1}
                         containerBorderColor={THEME_COLOR.PRIMARY_COLOR.gray}
-                    /> */}
+                    />
                     <Text style={styles.totalReviews}>{totalReviews} Reviews</Text>
                 </View>
             }

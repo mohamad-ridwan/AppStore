@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import PriceSection from "./price-section";
 import ProductName from "./product-name";
 import Rating from "./rating";
+import Description from "./description";
 
 type Props = {
     title: string
@@ -12,6 +13,7 @@ type Props = {
     discountPrice?: string
     rating?: number
     totalReviews?: number
+    description: string
 }
 
 const MainInfo = memo(({
@@ -21,7 +23,8 @@ const MainInfo = memo(({
     discountPercentage,
     discountPrice,
     rating,
-    totalReviews
+    totalReviews,
+    description
 }: Props) => {
     return (
         <View style={styles.container}>
@@ -34,6 +37,8 @@ const MainInfo = memo(({
             <ProductName title={title} />
 
             <Rating rating={rating} totalReviews={totalReviews} />
+
+            <Description description={description} />
         </View>
     )
 })
