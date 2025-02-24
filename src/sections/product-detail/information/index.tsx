@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { Product } from "../../../types/store/products/productsSlice";
 import { StyleSheet, View } from "react-native";
-import MainInfo from "./MainInfo";
+import MainInfo from "./main-info";
 
 type Props = {
     product: Product
@@ -18,7 +18,7 @@ const Information = memo(({ product, discountPrice }: Props) => {
                 discountPercentage={product.discountPercentage}
                 discountPrice={discountPrice}
                 rating={product.rating}
-                totalReviews={product.reviews.length}
+                totalReviews={product.reviews?.length}
             />
         </View>
     )
