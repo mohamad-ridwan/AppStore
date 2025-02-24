@@ -17,6 +17,7 @@ type Props = {
     labelFontWeight?: any
     containerBorderWidth?: number
     containerBorderColor?: string
+    containerMarginTop?: number
 }
 
 const LabelCard = memo(({
@@ -32,7 +33,8 @@ const LabelCard = memo(({
     containerPaddingHorizontal = 12,
     labelFontWeight = 500,
     containerBorderWidth,
-    containerBorderColor
+    containerBorderColor,
+    containerMarginTop
 }: Props) => {
     return (
         <View style={[
@@ -43,7 +45,8 @@ const LabelCard = memo(({
                 paddingVertical: containerPaddingVertical,
                 paddingHorizontal: containerPaddingHorizontal,
                 borderWidth: containerBorderWidth,
-                borderColor: containerBorderColor
+                borderColor: containerBorderColor,
+                marginTop: containerMarginTop
             }
         ]}>
             {icon &&

@@ -50,10 +50,11 @@ const PriceSection = memo(({
             {brand &&
                 <LabelCard
                     label={brand}
-                    icon="pricetag-outline"
                     containerRadius={13}
+                    labelColor={THEME_COLOR.SECONDARY_COLOR.darkGray}
                     labelFontSize={13 * PixelRatio.getFontScale()}
-                    containerBgColor={THEME_COLOR.SECONDARY_COLOR.darkGray}
+                    containerBgColor="transparent"
+                    containerMarginTop={5}
                 />
             }
         </View>
