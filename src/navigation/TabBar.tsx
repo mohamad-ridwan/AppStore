@@ -22,7 +22,8 @@ export default function TabBar({
 
     // HANDLE HIDE NAVIGATOR
     if (state.routeNames.find((item: any, index: number) =>
-        (item === 'Login' && state.index === index)
+        (item === 'Login' && state.index === index) ||
+        (item === 'ProductDetail' && state.index === index)
     )) {
         return <></>
     }
